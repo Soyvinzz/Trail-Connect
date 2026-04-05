@@ -135,29 +135,29 @@ include 'partials/navbar.php';
 </div>
 <script>
 (function () {
-  var details = document.getElementById('profile-edit');
-  var openBtn = document.getElementById('profile-edit-open');
-  var closeBtn = document.getElementById('profile-edit-close');
-  if (details && openBtn) {
+    var details = document.getElementById('profile-edit');
+    var openBtn = document.getElementById('profile-edit-open');
+    var closeBtn = document.getElementById('profile-edit-close');
+    if (details && openBtn) {
     openBtn.addEventListener('click', function () {
-      details.open = true;
-      details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      var nameInput = document.getElementById('pf-name');
-      if (nameInput) {
+        details.open = true;
+        details.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        var nameInput = document.getElementById('pf-name');
+        if (nameInput) {
         setTimeout(function () {
-          nameInput.focus();
+            nameInput.focus();
         }, 280);
-      }
+        }
     });
-  }
-  if (details && closeBtn) {
+    }
+    if (details && closeBtn) {
     closeBtn.addEventListener('click', function () {
-      details.open = false;
-      if (openBtn) {
+        details.open = false;
+        if (openBtn) {
         openBtn.focus();
-      }
+        }
     });
-  }
+    }
 })();
 </script>
 <?php include 'partials/footer.php'; ?>

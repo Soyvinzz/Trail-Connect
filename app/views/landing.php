@@ -60,11 +60,11 @@ include 'partials/header.php';
 </main>
 <script>
 (function () {
-  var v = document.querySelector('.landing__video');
-  if (!v) return;
-  v.muted = true;
-  var p = v.play();
-  if (p && typeof p.then === 'function') p.catch(function () {});
+    var v = document.querySelector('.landing__video');
+    if (!v) return;
+    v.muted = true;
+    var p = v.play();
+    if (p && typeof p.then === 'function') p.catch(function () {});
 })();
 </script>
 <?php include 'partials/footer.php'; ?>

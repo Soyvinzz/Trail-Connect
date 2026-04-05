@@ -7,7 +7,7 @@ $name = tc_display_name();
 include 'partials/header.php';
 include 'partials/navbar.php';
 
-// Card data — swap with DB queries when ready
+
 $hikerCards = [
   [
     'label'   => 'Upcoming',
@@ -80,7 +80,7 @@ $organizerCards = [
 $cards   = $role === 'hiker' ? $hikerCards : $organizerCards;
 $jsCards = json_encode(array_values($cards));
 ?>
-<!-- ═══════════════════════ CINEMATIC DASHBOARD ═══════════════════════ -->
+
 <div class="dash-cinematic" id="dashCinematic">
 
   <!-- Dynamic backgrounds (one per card) -->
@@ -92,7 +92,7 @@ $jsCards = json_encode(array_values($cards));
   </div>
   <div class="dash-grain"></div>
 
-  <!-- ── Hero (no panel wrap; type colors match app pages) ── -->
+
   <div class="dash-hero-stack">
     <div class="dash-hero-content">
       <div class="dash-kicker" id="dashKicker">Negros Occidental</div>
@@ -123,7 +123,6 @@ $jsCards = json_encode(array_values($cards));
     <?php endif; ?>
   </div>
 
-  <!-- ── Slider + controls (bottom) ── -->
   <div class="dash-bottom" id="dashBottom">
     <div class="dash-slider-wrap" id="dashSliderWrap">
       <div class="dash-track" id="dashTrack"></div>
@@ -144,9 +143,9 @@ $jsCards = json_encode(array_values($cards));
     </div>
   </div>
 
-</div><!-- /.dash-cinematic -->
+</div>
 
-<!-- Spec map — hidden in production; set display:block for dev reference -->
+
 <div class="container container--app proto-map card glass-stack" aria-label="Specification screen index">
   <h2 class="section-title">All spec screens (quick links)</h2>
   <ol class="prototype-map__list">
@@ -181,7 +180,7 @@ $jsCards = json_encode(array_values($cards));
   const ledeEl   = document.getElementById('dashLede');
   const cinEl    = document.getElementById('dashCinematic');
 
-  // Fix height based on real header measurement
+
   const headerEl = document.querySelector('.site-header');
   if (headerEl) {
     const hh = headerEl.offsetHeight;
@@ -190,7 +189,6 @@ $jsCards = json_encode(array_values($cards));
 
   totEl.textContent = String(N).padStart(2, '0');
 
-  /* ── Build card strip ── */
   function buildCards(exitClone) {
     trackEl.innerHTML = '';
     if (exitClone) trackEl.appendChild(exitClone);
@@ -209,7 +207,7 @@ $jsCards = json_encode(array_values($cards));
           }</span>`
         : '';
 
-      // Strip diff word from meta to avoid duplication
+
       const cleanMeta = d.meta.replace(/^(Easy|Moderate|Hard)\s[·•]\s?/i, '');
 
       el.innerHTML = `
@@ -234,7 +232,7 @@ $jsCards = json_encode(array_values($cards));
     curEl.textContent  = String(idx + 1).padStart(2, '0');
   }
 
-  /* ── Swap backgrounds ── */
+
   function updateBg() {
     bgsEl.querySelectorAll('.dash-bg').forEach((b) => {
       const pos = parseInt(b.getAttribute('data-pos') || '0', 10);
@@ -242,7 +240,6 @@ $jsCards = json_encode(array_values($cards));
     });
   }
 
-  /* ── Animate kicker / lede ── */
   function updateText(d) {
     [kickerEl, ledeEl].forEach(el => {
       el.classList.remove('tc-txt-enter');
@@ -260,7 +257,7 @@ $jsCards = json_encode(array_values($cards));
     }, 310);
   }
 
-  /* ── NEXT ── */
+
   function goNext(steps) {
     if (busy) return;
     busy = true;
@@ -284,7 +281,7 @@ $jsCards = json_encode(array_values($cards));
     }, 720);
   }
 
-  /* ── PREV ── */
+  
   function goPrev() {
     if (busy) return;
     busy = true;

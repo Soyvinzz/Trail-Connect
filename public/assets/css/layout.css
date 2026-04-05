@@ -1,5 +1,3 @@
-/* Glass header / nav — gray translucent bar (theme slate), light nav copy */
-
 .site-header {
   position: sticky;
   top: 0;
@@ -100,7 +98,6 @@
   max-width: min(960px, 100% - 2rem);
 }
 
-/* Wider app pages (profile, etc.) — aligns with nav max width, landscape feel */
 .container--app.container--landscape {
   max-width: min(1120px, 100% - 2rem);
 }

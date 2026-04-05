@@ -1,5 +1,3 @@
-/* Glass cards, buttons, forms, grids */
-
 .card {
   background: rgba(255, 255, 255, 0.38);
   border: 1px solid rgba(255, 255, 255, 0.55);
@@ -19,7 +17,6 @@
   margin-top: 1rem;
 }
 
-/* Primary action — glass pill on light bg */
 .btn-primary {
   font-family: var(--font-display);
   font-weight: 600;
@@ -53,7 +50,6 @@
   transform: none;
 }
 
-/* Glass CTA — landing & emphasis */
 .btn-glass {
   display: inline-flex;
   align-items: center;
@@ -85,7 +81,6 @@
   border-radius: 4px;
 }
 
-/* Feature strip on landing — informational only (no extra buttons) */
 .glass-card {
   display: flex;
   flex-direction: column;
@@ -186,7 +181,6 @@ textarea.input {
   gap: clamp(1rem, 2.5vw, 1.5rem);
 }
 
-/* Login — glass panel */
 main.auth-page {
   min-height: 100dvh;
   display: flex;
@@ -522,7 +516,6 @@ body.auth-body .field-hint {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* ——— App pages ——— */
 .page-head {
   margin-bottom: 1.5rem;
 }
@@ -857,7 +850,6 @@ body.auth-body .field-hint {
   color: var(--text-muted);
 }
 
-/* Find hikes toolbar */
 .find-toolbar .input--search {
   margin-bottom: 1rem;
 }
@@ -961,7 +953,6 @@ body.auth-body .field-hint {
   appearance: auto;
 }
 
-/* Event details */
 .safety-first {
   border-color: rgba(180, 70, 50, 0.35);
   background: rgba(255, 245, 240, 0.45);
@@ -1098,7 +1089,6 @@ body.auth-body .field-hint {
   margin-top: 1rem;
 }
 
-/* Tabs */
 .tabs--css .tabs__input {
   position: absolute;
   opacity: 0;
@@ -1218,14 +1208,12 @@ body.auth-body .field-hint {
   gap: 0.45rem;
 }
 
-/* Make action buttons consistent in event rows */
 .event-row .inline-actions .btn-primary,
 .event-row .inline-actions .btn-secondary {
   padding: 0.45rem 0.85rem;
   font-size: 0.75rem;
 }
 
-/* Organizer request actions */
 .request-card .inline-actions .btn-primary,
 .request-card .inline-actions .btn-secondary {
   padding: 0.45rem 0.85rem;
@@ -1237,7 +1225,6 @@ body.auth-body .field-hint {
   margin: 0 0 0.35rem;
 }
 
-/* Updates feed */
 .banner-safety {
   padding: 0.75rem 1rem;
   border-radius: var(--radius-sm);
@@ -1308,7 +1295,6 @@ body.auth-body .field-hint {
   margin-top: 0.5rem;
 }
 
-/* Profile — card layout (banner, avatar overlap, two-column info, quick actions) */
 .profile-card {
   --profile-ui-bg: rgba(230, 242, 252, 0.58);
   --profile-ui-border: rgba(100, 140, 180, 0.24);
@@ -1493,7 +1479,6 @@ body.auth-body .field-hint {
   flex-shrink: 0;
 }
 
-/* Role pill + interest chips — same pill look */
 .profile-card__tag,
 .profile-card__tags span {
   display: inline-block;
@@ -1669,7 +1654,6 @@ body.auth-body .field-hint {
   margin-bottom: 0.75rem;
 }
 
-/* Reviews */
 .star-picker {
   display: flex;
   flex-direction: column;
@@ -1732,7 +1716,6 @@ body.auth-body .field-hint {
   font-weight: 600;
 }
 
-/* Stronger glass on app pages */
 body.app-body .card.glass-stack {
   background: rgba(255, 255, 255, 0.52);
   border-color: rgba(255, 255, 255, 0.72);
@@ -1763,25 +1746,19 @@ body.app-body .grid--events > .event-card--panel {
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
 }
 
-/* ─────────────────────────────────────────────────────────────
-   Dashboard cinematic carousel (dashboard.php)
-   (Moved from inline <style> in the view)
-───────────────────────────────────────────────────────────── */
 body.dash-body {
   overflow: hidden;
   height: 100dvh;
   height: 100vh;
 }
 
-/* Same glass header + dark nav as other app pages (layout.css); lift above cinematic bg */
 body.dash-body .site-header {
   z-index: 200;
 }
 
-/* ── CINEMATIC WRAPPER ── */
 .dash-cinematic {
   position: relative;
-  height: calc(100dvh - 56px); /* refined via JS */
+  height: calc(100dvh - 56px);
   height: calc(100vh - 56px);
   overflow: hidden;
   display: flex;
@@ -1794,7 +1771,6 @@ body.dash-body .site-header {
     );
 }
 
-/* ── BACKGROUNDS ── */
 .dash-bgs {
   position: absolute;
   inset: 0;
@@ -1833,11 +1809,9 @@ body.dash-body .site-header {
   z-index: 2;
   pointer-events: none;
   opacity: 0.045;
-  /* CSS file is in public/assets/css => img is in public/assets/img */
   background-image: url('../img/mt-kalatungan.jpg');
 }
 
-/* ── HERO STACK (type colors match app pages; no wrapper card on headline) ── */
 .dash-hero-stack {
   position: relative;
   z-index: 10;
@@ -2000,7 +1974,6 @@ body.dash-body .site-header {
   opacity: 1;
 }
 
-/* ── NOTICE (under hero copy: solid-tint strip, no blur) ── */
 .dash-notice {
   position: relative;
   z-index: 10;
@@ -2061,7 +2034,6 @@ body.dash-body .site-header {
   text-underline-offset: 0.12em;
 }
 
-/* ── BOTTOM ── */
 .dash-bottom {
   position: relative;
   z-index: 10;
@@ -2070,7 +2042,6 @@ body.dash-body .site-header {
   gap: 18px;
 }
 
-/* ── SLIDER ── */
 .dash-slider-wrap {
   flex: 1;
   position: relative;
@@ -2088,7 +2059,6 @@ body.dash-body .site-header {
   position: relative;
 }
 
-/* ── CARDS ── */
 .dash-card {
   position: relative;
   border-radius: 14px;
@@ -2214,7 +2184,6 @@ body.dash-body .site-header {
   text-overflow: ellipsis;
 }
 
-/* diff colour chips inside cards */
 .dc-chip {
   display: inline-block;
   font-size: 8px;
@@ -2253,7 +2222,6 @@ body.dash-body .site-header {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
-/* ── CONTROLS ── */
 .dash-controls {
   display: flex;
   flex-direction: column;
@@ -2331,12 +2299,10 @@ body.dash-body .site-header {
   transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ── SPEC MAP (hidden in production, show for dev) ── */
 .proto-map {
   display: none;
 }
 
-/* ── TEXT TRANSITIONS ── */
 .tc-txt-exit {
   animation: tcOut 0.35s forwards !important;
 }
@@ -2364,7 +2330,6 @@ body.dash-body .site-header {
   }
 }
 
-/* Initial load stagger */
 @keyframes tcUp {
   to {
     opacity: 1;

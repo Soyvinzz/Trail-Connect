@@ -1,5 +1,3 @@
-/* TrailConnect — glass UI base + landscape accents (spec-aligned) */
-
 :root {
   --bark-deep: #2a1f18;
   --bark: #3d2d24;
@@ -21,16 +19,13 @@
   --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-sans: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Montserrat", var(--font-sans);
-  /* Glass tokens (app-wide) */
   --glass-bg: rgba(255, 255, 255, 0.14);
   --glass-bg-strong: rgba(255, 255, 255, 0.22);
   --glass-border: rgba(255, 255, 255, 0.28);
   --glass-border-soft: rgba(255, 255, 255, 0.18);
   --glass-blur: 14px;
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  /* Relative to this CSS file: public/assets/css/ → public/assets/img/ */
   --img-hero: url("../img/mountain-landingpage.jpg");
-  /* torn edge polygon — jagged bottom for section breaks */
   --edge-torn-bottom: polygon(
     0% 0%,
     100% 0%,
@@ -147,7 +142,6 @@ body.auth-body {
   background-attachment: fixed;
 }
 
-/* In-app screens — layered mist + forest glass canvas */
 body.app-body {
   background-color: #cdd8e2;
   background-image:
@@ -187,7 +181,6 @@ a:hover {
   color: var(--bark);
 }
 
-/* Page width: readable on ultrawide / landscape monitors */
 .container {
   width: 100%;
   max-width: min(1120px, 100% - 2rem);
@@ -196,7 +189,6 @@ a:hover {
   padding: clamp(1.25rem, 3vw, 2rem) clamp(1rem, 3vw, 1.5rem);
 }
 
-/* Optional hero band — torn transition into content */
 .landscape-hero {
   position: relative;
   padding: clamp(2rem, 6vw, 4rem) 1.5rem clamp(3rem, 10vw, 5.5rem);
@@ -237,7 +229,6 @@ a:hover {
   font-size: 1.05rem;
 }
 
-/* Inner content band with subtle mountain edge (footer-style) */
 .landscape-band {
   position: relative;
   padding: clamp(2rem, 5vw, 3.5rem) 1.5rem;
@@ -269,7 +260,6 @@ a:hover {
   border: 0;
 }
 
-/* ——— Full-screen landing: video + poster fallback (no card strip) ——— */
 .landing {
   position: relative;
   isolation: isolate;
