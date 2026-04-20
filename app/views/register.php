@@ -13,7 +13,7 @@ include 'partials/header.php';
     <form class="register-form" method="post" action="index.php?page=register" novalidate>
         <input type="hidden" name="action" value="register">
         <h2>Create account</h2>
-        <p class="form-lede">Join hikers and organizers across <strong>Bacolod</strong> and <strong>Negros Occidental</strong>. Pick your role once — it shapes your home screen.</p>
+        <p class="form-lede">Join hikers and organizers across the <strong>Philippines</strong>. Pick your role once — it shapes your home screen.</p>
 
         <fieldset class="field-group">
             <legend class="field-label">Full name</legend>
@@ -40,14 +40,14 @@ include 'partials/header.php';
                 <input type="radio" name="role" value="hiker" checked>
                 <span class="role-toggle__card">
                     <strong>Hiker</strong>
-                    <span>Discover Patag, Mambukal, DSB, and more — join hikes and build your trail reputation.</span>
+                    <span>Discover Pulag, Apo, G2, and more — join hikes and build your trail reputation.</span>
                 </span>
             </label>
             <label class="role-toggle__option">
                 <input type="radio" name="role" value="organizer">
                 <span class="role-toggle__card">
                     <strong>Organizer</strong>
-                    <span>Publish Negros Occ. events, review join requests, and post safety updates.</span>
+                    <span>Publish Philippines-wide events, review join requests, and post safety updates.</span>
                 </span>
             </label>
         </fieldset>

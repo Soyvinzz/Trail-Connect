@@ -53,7 +53,7 @@ include 'partials/header.php';
         <div class="landing__hero">
             <p class="landing__kicker">Explore</p>
             <h1 class="landing__title">Trails</h1>
-            <p class="landing__lede">Hikes around <strong>Bacolod</strong> and <strong>Negros Occidental</strong> — from Patag and Mambukal to DSB — join a group and stay trail-safe together.</p>
+            <p class="landing__lede">Major hikes across the <strong>Philippines</strong> — join a group and stay trail-safe together.</p>
             <a class="btn-glass btn-glass--explore" href="<?php echo htmlspecialchars(tc_url('page=login'), ENT_QUOTES, 'UTF-8'); ?>">Explore</a>
         </div>
     </div>

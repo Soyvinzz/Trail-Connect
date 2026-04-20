@@ -8,7 +8,7 @@ include 'partials/navbar.php';
 <div class="container container--app container--narrow">
     <header class="page-head">
         <h1 class="page-title">Account settings</h1>
-        <p class="page-lede">Security and notifications for your TrailConnect account — hikes around Bacolod &amp; Negros Occ.</p>
+        <p class="page-lede">Security and notifications for your TrailConnect account — hikes anywhere in the Philippines.</p>
         <a class="text-link" href="index.php?page=profile">← Profile</a>
     </header>
 
@@ -29,7 +29,7 @@ include 'partials/navbar.php';
         <ul class="check-list check-list--form">
             <li><label><input type="checkbox" name="email_join" checked> Email when a join request is approved or declined</label></li>
             <li><label><input type="checkbox" name="email_updates" checked> Push + email for <strong>safety</strong> and weather updates on joined hikes</label></li>
-            <li><label><input type="checkbox" name="digest"> Weekly digest: new hikes near Murcia, Silay, DSB &amp; Victorias</label></li>
+            <li><label><input type="checkbox" name="digest"> Weekly digest: new hikes in Luzon, Visayas, Mindanao &amp; Palawan</label></li>
         </ul>
         <button type="submit" class="btn-secondary">Save preferences</button>
     </form>

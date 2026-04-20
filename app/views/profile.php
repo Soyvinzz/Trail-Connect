@@ -12,7 +12,7 @@ include 'partials/navbar.php';
 <div class="container container--app container--landscape">
     <header class="page-head">
         <h1 class="page-title">Profile</h1>
-        <p class="page-lede">Reputation and trail history on Negros trails — from <strong>Patag</strong> ridgelines to <strong>Victorias</strong> eco loops.</p>
+        <p class="page-lede">Reputation and trail history across the <strong>Philippines</strong> — from Cordillera traverses to Mindanao majors.</p>
     </header>
 
     <section class="profile-card" aria-label="Your profile">
@@ -29,7 +29,7 @@ include 'partials/navbar.php';
                 <div class="profile-card__col profile-card__col--main">
                     <h2 class="profile-card__name"><?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?></h2>
                     <p class="profile-card__title"><?php echo htmlspecialchars($roleLabel, ENT_QUOTES, 'UTF-8'); ?></p>
-                    <p class="profile-card__location">Bacolod City, Negros Occidental</p>
+                    <p class="profile-card__location">Baguio City, Philippines</p>
                     <p class="profile-card__email">you@example.com</p>
                     <p class="profile-card__rep">
                         <span class="stars" aria-label="4.5 stars">★★★★½</span>
@@ -59,11 +59,11 @@ include 'partials/navbar.php';
                             Interests
                         </h3>
                         <div class="profile-card__tags">
-                            <span>Day hikes</span>
-                            <span>Patag</span>
-                            <span>Mambukal</span>
+                            <span>Major hikes</span>
+                            <span>Pulag</span>
+                            <span>G2</span>
                             <span>Reviews</span>
-                            <span>Negros trails</span>
+                            <span>Philippines</span>
                         </div>
                     </div>
                 </div>
@@ -91,7 +91,7 @@ include 'partials/navbar.php';
                 <a class="profile-quick" href="index.php?page=my_event">
                     <div class="profile-quick__text">
                         <strong class="profile-quick__title">Your events</strong>
-                        <span class="profile-quick__desc">6 organized in Negros Occ. — manage joiners &amp; updates.</span>
+                        <span class="profile-quick__desc">6 organized nationwide — manage joiners &amp; updates.</span>
                     </div>
                     <span class="profile-quick__arrow" aria-hidden="true">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -114,10 +114,10 @@ include 'partials/navbar.php';
                 <input id="pf-name" class="input" name="display_name" value="<?php echo htmlspecialchars($name, ENT_QUOTES, 'UTF-8'); ?>">
 
                 <label class="field-label" for="pf-bio">Bio</label>
-                <textarea id="pf-bio" class="input" name="bio" rows="3" placeholder="Weekend hiker based in Bacolod — love Patag sunrises and Mambukal mist."></textarea>
+                <textarea id="pf-bio" class="input" name="bio" rows="3" placeholder="Weekend mountaineer — Cordillera sea of clouds and technical Visayas lines."></textarea>
 
                 <label class="field-label" for="pf-home">Home base</label>
-                <input id="pf-home" class="input" name="home" value="Bacolod City, Negros Occidental">
+                <input id="pf-home" class="input" name="home" value="Baguio City, Philippines">
 
                 <button type="button" class="btn-primary">Save changes</button>
             </form>
@@ -127,9 +127,9 @@ include 'partials/navbar.php';
     <section class="card card--stack glass-stack">
         <h2 class="section-title">Recent trails</h2>
         <ul class="detail-list">
-            <li><strong>Patag plateau loop</strong> — Silay · with Mara Villanueva</li>
-            <li><strong>Gawahon eco loop</strong> — Victorias · family pace</li>
-            <li><strong>Mambukal falls trail</strong> — Murcia · Ian Concepcion</li>
+            <li><strong>Mt. Pulag · Akiki–Ambangeg</strong> — Benguet / Ifugao · with Cordillera Guides</li>
+            <li><strong>Mt. Tabayoc · Mossy forest</strong> — Benguet · Kabayan</li>
+            <li><strong>Mt. Halcon · Technical ascent</strong> — Mindoro · Oriental Mindoro Peaks</li>
         </ul>
     </section>
 </div>

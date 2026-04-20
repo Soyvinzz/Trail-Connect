@@ -11,26 +11,26 @@ include 'partials/navbar.php';
 $hikerCards = [
   [
     'label'   => 'Upcoming',
-    'title'   => 'Patag plateau loop',
-    'meta'    => 'Moderate · Sat, Apr 12 · 8:00 AM',
-    'diff'    => 'mod',
-    'org'     => '★★★★½ Mara Villanueva · Silay',
+    'title'   => 'Mt. Guiting-Guiting Knife-Edge',
+    'meta'    => 'Very hard · Romblon · Jun 1 · 4 days',
+    'diff'    => 'vhard',
+    'org'     => '★★★★★ Sibuyan Expeditions',
     'cta'     => ['text' => 'View details', 'href' => 'index.php?page=event_details', 'type' => 'primary'],
     'img'     => 'assets/img/mt-kalatungan.jpg',
   ],
   [
     'label'   => 'Upcoming',
-    'title'   => 'Mambukal falls trail',
-    'meta'    => 'Easy · Sun, Apr 20 · 9:30 AM',
-    'diff'    => 'easy',
-    'org'     => '★★★★☆ Ian Concepcion · Murcia',
+    'title'   => 'Mt. Pulag · Akiki–Ambangeg',
+    'meta'    => 'Hard · Benguet / Ifugao · May 3 · 3 days',
+    'diff'    => 'hard',
+    'org'     => '★★★★½ Cordillera Guides',
     'cta'     => ['text' => 'View details', 'href' => 'index.php?page=event_details', 'type' => 'primary'],
     'img'     => 'assets/img/mountain1.jpg',
   ],
   [
     'label'   => 'Discover',
-    'title'   => 'DSB pine ridge',
-    'meta'    => 'Hard · Don Salvador Benedicto · 6 spots left',
+    'title'   => 'Mt. Apo Traverse',
+    'meta'    => 'Hard · Davao / Cotabato · Highest peak PH · spots open',
     'diff'    => 'hard',
     'org'     => '',
     'cta'     => ['text' => 'Browse hikes', 'href' => 'index.php?page=find_hikes', 'type' => 'secondary'],
@@ -38,9 +38,9 @@ $hikerCards = [
   ],
   [
     'label'   => 'Discover',
-    'title'   => 'Gawahon eco loop',
-    'meta'    => 'Easy · Victorias · Open spots',
-    'diff'    => 'easy',
+    'title'   => 'Mt. Halcon Technical Ascent',
+    'meta'    => 'Very hard · Mindoro · Major hike · waitlist',
+    'diff'    => 'vhard',
     'org'     => '',
     'cta'     => ['text' => 'Browse hikes', 'href' => 'index.php?page=find_hikes', 'type' => 'secondary'],
     'img'     => 'assets/img/mountain-landingpage.jpg',
@@ -51,16 +51,16 @@ $organizerCards = [
   [
     'label'   => 'Organizer',
     'title'   => 'Pending requests',
-    'meta'    => '2 new · Patag & Mambukal',
+    'meta'    => '2 new · Pulag batch & G2 roster',
     'diff'    => '',
-    'org'     => 'Review join requests before the weekend rush.',
+    'org'     => 'Review join requests for technical majors and traverse slots.',
     'cta'     => ['text' => 'Review now', 'href' => 'index.php?page=my_event', 'type' => 'primary'],
     'img'     => 'assets/img/mt-kalatungan.jpg',
   ],
   [
     'label'   => 'Organizer',
     'title'   => 'Create new event',
-    'meta'    => 'Publish a Negros Occ. hike in three steps.',
+    'meta'    => 'Publish a Philippines hike in three steps.',
     'diff'    => '',
     'org'     => '',
     'cta'     => ['text' => 'Create event', 'href' => 'index.php?page=create_event', 'type' => 'primary'],
@@ -69,7 +69,7 @@ $organizerCards = [
   [
     'label'   => 'Calendar',
     'title'   => 'Upcoming organized',
-    'meta'    => 'Sat 12 · Patag · Sun 20 · Mambukal · May 3 · DSB draft',
+    'meta'    => 'May · Pulag · Jun · G2 · Jul · Apo traverse draft',
     'diff'    => '',
     'org'     => '',
     'cta'     => ['text' => 'View updates', 'href' => 'index.php?page=updates', 'type' => 'secondary'],
@@ -95,7 +95,7 @@ $jsCards = json_encode(array_values($cards));
 
   <div class="dash-hero-stack">
     <div class="dash-hero-content">
-      <div class="dash-kicker" id="dashKicker">Negros Occidental</div>
+      <div class="dash-kicker" id="dashKicker">Philippines</div>
 
       <h1 class="dash-page-title" id="dashTitle">
         <span class="dash-page-title__greet">Welcome back,</span>
@@ -104,8 +104,8 @@ $jsCards = json_encode(array_values($cards));
 
       <p class="dash-page-lede" id="dashLede">
         <?php echo $role === 'organizer'
-          ? 'Manage Patag, Mambukal, DSB, and Gawahon hikes — see requests at a glance and publish new weekends.'
-          : 'Swipe through upcoming Negros hikes — Patag ridges, Mambukal mist, DSB pines, and Gawahon eco loops.'; ?>
+          ? 'Coordinate Pulag, G2, Apo, and Halcon expeditions — see requests at a glance and publish new climbs nationwide.'
+          : 'Swipe through major Philippines hikes — Cordillera sea of clouds, Sibuyan knife-edges, Mindanao traverses, and more.'; ?>
       </p>
 
       <p class="dash-role-line">
@@ -118,7 +118,7 @@ $jsCards = json_encode(array_values($cards));
     <div class="dash-notice">
       <strong>Pending requests</strong> — You have
       <a href="index.php?page=my_event">1 join request</a>
-      awaiting organizer review (Granite Ridge sample).
+      awaiting organizer review (Mt. Pulag batch sample).
     </div>
     <?php endif; ?>
   </div>
@@ -203,7 +203,10 @@ $jsCards = json_encode(array_values($cards));
 
       const chip = d.diff
         ? `<span class="dc-chip dc-chip--${d.diff}">${
-            d.diff === 'mod' ? 'Moderate' : d.diff === 'easy' ? 'Easy' : 'Hard'
+            d.diff === 'mod' ? 'Moderate'
+              : d.diff === 'easy' ? 'Easy'
+              : d.diff === 'vhard' ? 'Very hard'
+              : 'Hard'
           }</span>`
         : '';
 
@@ -247,7 +250,7 @@ $jsCards = json_encode(array_values($cards));
       el.classList.add('tc-txt-exit');
     });
     setTimeout(() => {
-      kickerEl.textContent = 'Negros Occidental · ' + d.label;
+      kickerEl.textContent = 'Philippines · ' + d.label;
       ledeEl.textContent   = d.title + ' — ' + d.meta.replace(/<[^>]*>/g, '');
       [kickerEl, ledeEl].forEach(el => {
         el.classList.remove('tc-txt-exit');

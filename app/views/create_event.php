@@ -8,7 +8,7 @@ include 'partials/navbar.php';
 <div class="container container--app container--narrow">
     <header class="page-head">
         <h1 class="page-title">Create event</h1>
-        <p class="page-lede">Organizers only · List hikes around Bacolod &amp; Negros Occ. in <strong>three steps</strong> — basics, details, safety &amp; approvals.</p>
+        <p class="page-lede">Organizers only · Publish major hikes anywhere in the <strong>Philippines</strong> in <strong>three steps</strong> — basics, details, safety &amp; approvals.</p>
         <ol class="ce-steps" aria-label="Progress">
             <li class="ce-steps__item is-done">Basic info</li>
             <li class="ce-steps__item is-current" aria-current="step">Details</li>
@@ -22,15 +22,21 @@ include 'partials/navbar.php';
         <fieldset class="ce-panel">
             <legend class="ce-panel__title">Step 1 — Basic info</legend>
             <label class="field-label" for="evt-title">Event title</label>
-            <input id="evt-title" class="input" name="title" placeholder="Patag sunrise · Mambukal group hike" required>
+            <input id="evt-title" class="input" name="title" placeholder="Mt. Pulag · Akiki–Ambangeg traverse" required>
 
             <label class="field-label" for="evt-trail">Trail (curated)</label>
             <select id="evt-trail" class="input input--select" name="trail" required>
                 <option value="">Select trail…</option>
-                <option>Patag plateau loop (Silay)</option>
-                <option>Mambukal falls trail (Murcia)</option>
-                <option>DSB pine ridge (Don Salvador Benedicto)</option>
-                <option>Gawahon eco loop (Victorias)</option>
+                <option>Mt. Guiting-Guiting Knife-Edge (Romblon)</option>
+                <option>Mt. Halcon Technical Ascent (Mindoro)</option>
+                <option>Mt. Mantalingajan (Palawan)</option>
+                <option>Mt. Apo · Kapatagan–Kidapawan</option>
+                <option>Mt. Dulang-Dulang · Mt. Kitanglad (Bukidnon)</option>
+                <option>Mt. Kalatungan (Bukidnon)</option>
+                <option>Mt. Ragang (Lanao del Sur)</option>
+                <option>Mt. Piapayungan (Mindanao)</option>
+                <option>Mt. Tabayoc (Benguet)</option>
+                <option>Mt. Pulag · Akiki–Ambangeg (Benguet / Ifugao)</option>
             </select>
 
             <div class="date-pair">
@@ -55,13 +61,13 @@ include 'partials/navbar.php';
             </div>
 
             <label class="field-label" for="evt-meet">Meeting point</label>
-            <input id="evt-meet" class="input" name="meet" placeholder="e.g. Mambukal resort entrance / Patag jump-off" required>
+            <input id="evt-meet" class="input" name="meet" placeholder="e.g. Ranger station / DENR briefing point / agreed jump-off" required>
 
             <label class="field-label" for="evt-max">Participant maximum</label>
             <input id="evt-max" class="input" type="number" name="max" min="2" max="50" value="12" required>
 
             <label class="field-label" for="evt-desc">Description</label>
-            <textarea id="evt-desc" class="input" name="desc" placeholder="Pace, regroup points, and what makes this Negros trail special." required></textarea>
+            <textarea id="evt-desc" class="input" name="desc" placeholder="Pace, regroup points, exposure, and what makes this Philippine climb special." required></textarea>
         </fieldset>
 
         <fieldset class="ce-panel">
@@ -80,7 +86,7 @@ include 'partials/navbar.php';
                 <li><label><input type="checkbox" name="gear[]" value="headlamp"> Headlamp</label></li>
             </ul>
             <label class="field-label" for="evt-gear-other">Other gear notes</label>
-            <input id="evt-gear-other" class="input" name="gear_other" placeholder="Cap / sun protection for exposed Patag sections…">
+            <input id="evt-gear-other" class="input" name="gear_other" placeholder="Rope / helmet if technical sections…">
 
             <label class="field-label" for="evt-safety">Safety notes</label>
             <textarea id="evt-safety" class="input" name="safety" placeholder="Fog, wind, red-clay slips after rain, turnaround rules…" required></textarea>
@@ -91,7 +97,7 @@ include 'partials/navbar.php';
 
         <section class="publish-summary card card--inset">
             <h2 class="section-title">Pre-publish summary</h2>
-            <p class="field-hint">Sample fields above — adjust for a real Mambukal, DSB, or Patag publish.</p>
+            <p class="field-hint">Sample fields above — adjust for a real Pulag, G2, or Apo publish.</p>
             <ul class="detail-list detail-list--compact">
                 <li>Trail + schedule in step 1</li>
                 <li>Difficulty, meet point, cap, story in step 2</li>

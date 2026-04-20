@@ -1,9 +1,10 @@
 .card {
-  background: rgba(255, 255, 255, 0.38);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(18, 18, 18, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
   padding: clamp(1.25rem, 3vw, 1.75rem);
-  box-shadow: var(--shadow-soft);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  color: var(--text-on-card, #e4e4e7);
   -webkit-backdrop-filter: blur(var(--glass-blur));
   backdrop-filter: blur(var(--glass-blur));
 }
@@ -19,25 +20,30 @@
 
 .btn-primary {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  background: rgba(30, 45, 55, 0.88);
-  color: #fff;
+  background: linear-gradient(135deg, #78ef9f, #57df87);
+  color: #0d1210;
   padding: 0.7rem 1.5rem;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   cursor: pointer;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  box-shadow: 0 4px 20px rgba(15, 25, 35, 0.2);
+  box-shadow:
+    0 8px 24px rgba(10, 20, 15, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
   transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease, background 0.15s ease;
 }
 
 .btn-primary:hover {
-  background: rgba(40, 58, 70, 0.95);
-  box-shadow: 0 6px 28px rgba(15, 25, 35, 0.28);
+  background: linear-gradient(135deg, #8bf5ae, #68e696);
+  box-shadow:
+    0 10px 28px rgba(8, 16, 12, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36);
+  filter: saturate(1.05);
 }
 
 .btn-primary:active {
@@ -48,6 +54,7 @@
   opacity: 0.55;
   cursor: not-allowed;
   transform: none;
+  color: rgba(13, 18, 16, 0.72);
 }
 
 .btn-glass {
@@ -217,14 +224,11 @@ main.auth-page form h2 {
 main.auth-page form .btn-primary {
   width: 100%;
   margin-top: 0.5rem;
-  background: rgba(255, 255, 255, 0.95);
-  color: var(--text);
-  border-color: rgba(255, 255, 255, 0.5);
+  color: #0d1210;
 }
 
 main.auth-page form .btn-primary:hover {
-  background: #fff;
-  filter: none;
+  filter: saturate(1.05);
 }
 
 .auth-brand {
@@ -277,8 +281,7 @@ main.auth-page .register-form h2 {
 main.auth-page .register-form .btn-primary {
   width: 100%;
   margin-top: 0.5rem;
-  background: rgba(255, 255, 255, 0.95);
-  color: var(--text);
+  color: #0d1210;
 }
 
 .auth-card-msg {
@@ -316,6 +319,27 @@ main.auth-page .register-form .btn-primary {
 body.auth-body .field-label,
 body.auth-body .field-group legend {
   color: rgba(255, 255, 255, 0.85);
+}
+
+body.app-body .field-label,
+body.app-body .field-group legend {
+  color: #a3a3a3;
+}
+
+body.app-body .input {
+  color: #f4f4f5;
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(10, 10, 10, 0.9);
+}
+
+body.app-body .input::placeholder {
+  color: #71717a;
+}
+
+body.app-body .input:focus {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(15, 15, 15, 0.98);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
 }
 
 .field-hint {
@@ -525,7 +549,7 @@ body.auth-body .field-hint {
   font-weight: 700;
   font-size: clamp(1.5rem, 4vw, 2rem);
   letter-spacing: -0.02em;
-  color: var(--text);
+  color: inherit;
   margin: 0 0 0.5rem;
 }
 
@@ -560,7 +584,7 @@ body.auth-body .field-hint {
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--text);
+  color: inherit;
   margin: 0 0 0.75rem;
 }
 
@@ -579,8 +603,8 @@ body.auth-body .field-hint {
 }
 
 .card--inset {
-  background: rgba(255, 255, 255, 0.22);
-  border-style: dashed;
+  background: rgba(12, 12, 12, 0.75);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
   margin-top: 1rem;
 }
 
@@ -696,6 +720,34 @@ body.auth-body .field-hint {
   color: #7a2518;
 }
 
+.badge-diff--vhard {
+  background: rgba(160, 80, 140, 0.28);
+  color: #4a1538;
+}
+
+body.app-body .badge-diff--easy,
+body.app-body .badge-diff--mod,
+body.app-body .badge-diff--hard,
+body.app-body .badge-diff--vhard {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+body.app-body .badge-diff--easy {
+  background: rgba(100, 180, 130, 0.35);
+}
+
+body.app-body .badge-diff--mod {
+  background: rgba(220, 170, 80, 0.35);
+}
+
+body.app-body .badge-diff--hard {
+  background: rgba(200, 90, 70, 0.4);
+}
+
+body.app-body .badge-diff--vhard {
+  background: rgba(180, 100, 160, 0.45);
+}
+
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -754,7 +806,8 @@ body.auth-body .field-hint {
 }
 
 .grid--events {
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
+  gap: clamp(0.95rem, 2.2vw, 1.35rem);
 }
 
 .grid--dash {
@@ -1296,21 +1349,22 @@ body.auth-body .field-hint {
 }
 
 .profile-card {
-  --profile-ui-bg: rgba(230, 242, 252, 0.58);
-  --profile-ui-border: rgba(100, 140, 180, 0.24);
-  --profile-ui-hover: rgba(218, 234, 250, 0.88);
-  --profile-ui-ink: #1a2228;
+  --profile-ui-bg: rgba(35, 35, 35, 0.95);
+  --profile-ui-border: rgba(255, 255, 255, 0.12);
+  --profile-ui-hover: rgba(50, 50, 50, 0.98);
+  --profile-ui-ink: #f4f4f5;
   position: relative;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  background: rgba(16, 16, 16, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   box-shadow:
-    0 16px 48px rgba(15, 35, 55, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    0 16px 48px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   overflow: hidden;
   margin-bottom: 1.5rem;
+  color: #e4e4e7;
 }
 
 .profile-card__banner {
@@ -1318,11 +1372,10 @@ body.auth-body .field-hint {
   height: clamp(148px, 26vw, 210px);
   background: linear-gradient(
     115deg,
-    #82b99c 0%,
-    #41c67d 22%,
-    #2f8a79 48%,
-    #047754 78%,
-    #282828 100%
+    #2a2a2a 0%,
+    #1a1a1a 35%,
+    #0d0d0d 70%,
+    #000000 100%
   );
 }
 
@@ -1344,9 +1397,9 @@ body.auth-body .field-hint {
   width: 104px;
   height: 104px;
   border-radius: 50%;
-  border: 4px solid #fff;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(232, 240, 246, 0.9));
-  box-shadow: 0 8px 28px rgba(15, 30, 45, 0.12);
+  border: 4px solid #0a0a0a;
+  background: linear-gradient(145deg, #2a2a2a, #171717);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1434,7 +1487,7 @@ body.auth-body .field-hint {
   border: 1px solid var(--profile-ui-border);
   background: var(--profile-ui-bg);
   color: var(--profile-ui-ink) !important;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
   transition:
     background 0.15s ease,
     color 0.15s ease,
@@ -1444,7 +1497,7 @@ body.auth-body .field-hint {
 
 .profile-card__btn:hover {
   background: var(--profile-ui-hover);
-  border-color: rgba(80, 120, 160, 0.32);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .profile-card__btn:focus-visible {
@@ -1486,9 +1539,9 @@ body.auth-body .field-hint {
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 600;
-  background: rgba(255, 228, 210, 0.65);
-  border: 1px solid rgba(230, 180, 150, 0.35);
-  color: rgba(45, 38, 34, 0.92);
+  background: rgba(40, 40, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e4e4e7;
 }
 
 .profile-card__tags {
@@ -1503,7 +1556,7 @@ body.auth-body .field-hint {
   gap: 0.75rem;
   margin-top: 1.5rem;
   padding-top: 1.35rem;
-  border-top: 1px solid rgba(30, 45, 55, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .profile-quick {
@@ -1517,7 +1570,7 @@ body.auth-body .field-hint {
   border: 1px solid var(--profile-ui-border);
   text-decoration: none !important;
   color: inherit !important;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   transition:
     background 0.15s ease,
     box-shadow 0.15s ease,
@@ -1527,8 +1580,8 @@ body.auth-body .field-hint {
 
 .profile-quick:hover {
   background: var(--profile-ui-hover);
-  border-color: rgba(80, 120, 160, 0.3);
-  box-shadow: 0 6px 20px rgba(15, 45, 85, 0.07);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
   transform: translateY(-1px);
 }
 
@@ -1541,7 +1594,7 @@ body.auth-body .field-hint {
   font-family: var(--font-display);
   font-size: 0.82rem;
   font-weight: 700;
-  color: var(--text);
+  color: #fafafa;
   margin-bottom: 0.2rem;
 }
 
@@ -1562,12 +1615,12 @@ body.auth-body .field-hint {
   background: var(--profile-ui-bg);
   border: 1px solid var(--profile-ui-border);
   color: var(--profile-ui-ink);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .profile-quick:hover .profile-quick__arrow {
   background: var(--profile-ui-hover);
-  border-color: rgba(80, 120, 160, 0.32);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 900px) {
@@ -1592,9 +1645,9 @@ body.auth-body .field-hint {
 }
 
 .profile-edit {
-  --profile-ui-bg: rgba(230, 242, 252, 0.58);
-  --profile-ui-border: rgba(100, 140, 180, 0.24);
-  --profile-ui-hover: rgba(218, 234, 250, 0.88);
+  --profile-ui-bg: rgba(35, 35, 35, 0.95);
+  --profile-ui-border: rgba(255, 255, 255, 0.12);
+  --profile-ui-hover: rgba(50, 50, 50, 0.98);
   margin-bottom: 1.5rem;
 }
 
@@ -1717,33 +1770,88 @@ body.auth-body .field-hint {
 }
 
 body.app-body .card.glass-stack {
-  background: rgba(255, 255, 255, 0.52);
-  border-color: rgba(255, 255, 255, 0.72);
+  background: rgba(20, 20, 20, 0.92);
+  border-color: rgba(255, 255, 255, 0.1);
   box-shadow:
-    0 12px 40px rgba(15, 35, 55, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  color: #e4e4e7;
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
 }
 
 body.app-body .card.glass-stack.safety-first {
-  background: rgba(255, 245, 240, 0.58);
-  border-color: rgba(180, 70, 50, 0.38);
+  background: rgba(28, 22, 20, 0.92);
+  border-color: rgba(180, 80, 60, 0.35);
   box-shadow:
-    0 12px 36px rgba(120, 40, 30, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    0 12px 36px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 body.app-body .grid--events > .event-card--panel {
+  display: flex;
+  flex-direction: column;
   padding: clamp(1.15rem, 2.8vw, 1.55rem);
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.48);
-  border: 1px solid rgba(255, 255, 255, 0.68);
+  background: rgba(22, 22, 22, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e4e4e7;
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   box-shadow:
-    0 10px 36px rgba(15, 30, 45, 0.09),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    0 12px 34px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 0 20px rgba(255, 255, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body.app-body .grid--events > .event-card--panel .btn-primary {
+  margin-top: auto;
+}
+
+body.app-body .trail-catalog__title,
+body.app-body .trail-data__name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 0.65rem;
+  color: #f4f4f5;
+}
+
+body.app-body .trail-catalog__block + .trail-catalog__block,
+body.app-body .trail-data__row + .trail-data__row {
+  margin-top: 1rem;
+}
+
+body.app-body .trail-catalog {
+  margin-top: clamp(1.15rem, 2.8vw, 1.8rem);
+}
+
+body.app-body .trail-catalog__block {
+  margin-top: 0.95rem;
+  padding: clamp(1rem, 2.2vw, 1.35rem);
+  border-radius: var(--radius-md);
+  background: rgba(16, 20, 32, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 18px rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body.app-body .trail-catalog__block .detail-list {
+  margin-top: 0.35rem;
+  line-height: 1.62;
+}
+
+body.app-body .trail-catalog__block .btn-primary {
+  margin-top: 0.85rem;
+}
+
+body.app-body .trail-catalog__intro,
+body.app-body .trail-data__intro {
+  margin-bottom: 1.25rem;
 }
 
 body.dash-body {
@@ -2216,6 +2324,15 @@ body.dash-body .site-header {
 .dc-chip--hard {
   background: rgba(255, 180, 170, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.dc-chip--vhard {
+  background: rgba(220, 160, 210, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.32);
   color: rgba(255, 255, 255, 0.94);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);

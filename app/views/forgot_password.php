@@ -18,7 +18,7 @@ include 'partials/header.php';
             <input type="hidden" name="page" value="forgot_password">
             <input type="hidden" name="sent" value="1">
             <h2>Reset password</h2>
-            <p class="form-lede">Enter the email you use for TrailConnect hikes in Negros Occidental.</p>
+            <p class="form-lede">Enter the email you use for your TrailConnect account.</p>
             <label class="field-label" for="fp-email">Email</label>
             <input id="fp-email" class="input" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
             <button class="btn-primary" type="submit">Send reset link</button>

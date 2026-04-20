@@ -1,16 +1,17 @@
 :root {
-  --bark-deep: #2a1f18;
-  --bark: #3d2d24;
-  --bark-soft: #5c463a;
-  --pine: #2f4a3e;
-  --pine-muted: #3d5c4d;
-  --sand: #c9a97a;
-  --sand-light: #e5d5bc;
-  --paper: #e8eef2;
-  --paper-white: #f4f7f9;
+  --bark-deep: #0a0a0a;
+  --bark: #e8e8e8;
+  --bark-soft: #a3a3a3;
+  --pine: #d4d4d4;
+  --pine-muted: #a3a3a3;
+  --sand: #737373;
+  --sand-light: #e5e5e5;
+  --paper: #171717;
+  --paper-white: #fafafa;
   --mist: rgba(255, 255, 255, 0.94);
-  --text: #1a2228;
-  --text-muted: #4a5560;
+  --text: #e8eaed;
+  --text-muted: #9ca3af;
+  --text-on-card: #e4e4e7;
   --danger: #8b3a2f;
   --radius-sm: 10px;
   --radius-md: 14px;
@@ -95,11 +96,11 @@ body {
   font-size: 1rem;
   line-height: 1.55;
   color: var(--text);
-  background-color: #e9e1e1;
+  background-color: #050505;
   background-image:
-    radial-gradient(ellipse 90% 60% at 10% 20%, rgba(47, 90, 110, 0.12), transparent 45%),
-    radial-gradient(ellipse 80% 50% at 90% 80%, rgba(45, 74, 62, 0.1), transparent 50%),
-    linear-gradient(165deg, #eef3f6 0%, #dce6ec 45%, #cfd9e2 100%);
+    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(255, 255, 255, 0.06), transparent 50%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(255, 255, 255, 0.04), transparent 45%),
+    linear-gradient(180deg, #0a0a0a 0%, #050505 50%, #000000 100%);
   background-attachment: fixed;
 }
 
@@ -133,9 +134,9 @@ body.landing-body {
 }
 
 body.auth-body {
-  background-color: #1a2429;
+  background-color: #000000;
   background-image:
-    linear-gradient(160deg, rgba(12, 18, 22, 0.88) 0%, rgba(25, 40, 48, 0.82) 100%),
+    linear-gradient(160deg, rgba(0, 0, 0, 0.82) 0%, rgba(10, 10, 10, 0.92) 100%),
     var(--img-hero);
   background-size: cover;
   background-position: center;
@@ -143,13 +144,25 @@ body.auth-body {
 }
 
 body.app-body {
-  background-color: #cdd8e2;
+  background-color: #000000;
   background-image:
-    radial-gradient(ellipse 130% 90% at 0% 0%, rgba(52, 92, 72, 0.16), transparent 58%),
-    radial-gradient(ellipse 100% 70% at 100% 5%, rgba(65, 105, 125, 0.14), transparent 52%),
-    radial-gradient(ellipse 90% 55% at 40% 100%, rgba(45, 74, 62, 0.1), transparent 55%),
-    linear-gradient(168deg, #eef6f8 0%, #dbe6ee 42%, #c5d3df 100%);
+    radial-gradient(ellipse 100% 80% at 50% -20%, rgba(60, 60, 60, 0.25), transparent 55%),
+    radial-gradient(ellipse 80% 50% at 100% 80%, rgba(40, 40, 40, 0.2), transparent 50%),
+    linear-gradient(165deg, #0d0d0d 0%, #050505 45%, #000000 100%);
   background-attachment: fixed;
+  color: var(--text);
+}
+
+body.app-body .page-title,
+body.app-body .section-title,
+body.app-body h1,
+body.app-body h2:not(.event-card__trail):not(.dash-card__title):not(.profile-card__name) {
+  color: #fafafa;
+}
+
+body.app-body .page-lede,
+body.app-body .card-lede {
+  color: var(--text-muted);
 }
 
 h1,
@@ -178,7 +191,7 @@ a {
 }
 
 a:hover {
-  color: var(--bark);
+  color: #f5f5f5;
 }
 
 .container {

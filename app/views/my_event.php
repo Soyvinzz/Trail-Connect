@@ -11,8 +11,8 @@ include 'partials/navbar.php';
         <h1 class="page-title">My events</h1>
         <p class="page-lede">
             <?php echo $role === 'organizer'
-                ? 'Host hikes from Mambukal to DSB — approve joiners, post updates, and keep capacity honest.'
-                : 'Track Patag, Gawahon, and coastal walks — upcoming slots, pending approvals, and past badges.'; ?>
+                ? 'Host major hikes anywhere in the Philippines — approve joiners, post updates, and keep capacity honest.'
+                : 'Track Pulag, G2, Apo, and Mindanao expeditions — upcoming slots, pending approvals, and past badges.'; ?>
         </p>
     </header>
 
@@ -31,10 +31,10 @@ include 'partials/navbar.php';
                     <article class="event-row">
                         <div class="event-row__main">
                             <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Patag plateau loop</h2>
+                                <h2 class="event-card__trail" style="margin:0">Mt. Pulag · Akiki–Ambangeg</h2>
                             </div>
-                            <p class="request-card__who">Organizer <strong>Mara Villanueva</strong> · Silay jump-off</p>
-                            <p class="request-card__when">Sat, Apr 12, 2026 · 8:00 AM</p>
+                            <p class="request-card__who">Organizer <strong>Cordillera Guides</strong> · Benguet briefing point</p>
+                            <p class="request-card__when">Sat, May 3, 2026 · staged meet</p>
                         </div>
                         <div class="inline-actions inline-actions--stack">
                             <span class="badge badge--approved">Approved</span>
@@ -42,13 +42,13 @@ include 'partials/navbar.php';
                             <a class="btn-secondary btn-secondary--sm" href="index.php?page=updates">Updates</a>
                         </div>
                     </article>
-                    <article class="event-row" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(30,45,55,0.1)">
+                    <article class="event-row" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.08)">
                         <div class="event-row__main">
                             <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Mambukal falls trail</h2>
+                                <h2 class="event-card__trail" style="margin:0">Mt. Apo · Kapatagan–Kidapawan</h2>
                             </div>
-                            <p class="request-card__who"><strong>Ian Concepcion</strong> · Murcia</p>
-                            <p class="request-card__when">Sun, Apr 20, 2026 · 9:30 AM</p>
+                            <p class="request-card__who"><strong>Mindanao Ascents</strong> · Davao / Cotabato</p>
+                            <p class="request-card__when">Sun, May 18, 2026 · multi-day</p>
                         </div>
                         <div class="inline-actions inline-actions--stack">
                             <span class="badge badge--approved">Approved</span>
@@ -60,10 +60,10 @@ include 'partials/navbar.php';
                     <article class="event-row">
                         <div class="event-row__main">
                             <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">DSB pine ridge</h2>
+                                <h2 class="event-card__trail" style="margin:0">Mt. Halcon · Technical ascent</h2>
                             </div>
-                            <p class="request-card__who">Host <strong>Rico Magbanua</strong> · manual approval</p>
-                            <p class="request-card__when">Requested Apr 2 · Event Apr 18</p>
+                            <p class="request-card__who">Host <strong>Oriental Mindoro Peaks</strong> · manual approval</p>
+                            <p class="request-card__when">Requested Apr 2 · Event Jun 8</p>
                         </div>
                         <div class="event-row__rail">
                             <span class="badge badge--pending">Pending review</span>
@@ -76,9 +76,9 @@ include 'partials/navbar.php';
                     <article class="event-row">
                         <div class="event-row__main">
                             <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Gawahon eco loop</h2>
+                                <h2 class="event-card__trail" style="margin:0">Mt. Tabayoc · Mossy forest</h2>
                             </div>
-                            <p class="request-card__who">Victorias Trail Club · easy family pace</p>
+                            <p class="request-card__who">Kabayan · Benguet · with Cordillera Guides</p>
                             <p class="request-card__when">Mar 8, 2026</p>
                         </div>
                         <div class="event-row__rail">
@@ -86,12 +86,12 @@ include 'partials/navbar.php';
                             <a class="btn-secondary" href="index.php?page=reviews">Leave review</a>
                         </div>
                     </article>
-                    <article class="event-row" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(30,45,55,0.1)">
+                    <article class="event-row" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.08)">
                         <div class="event-row__main">
                             <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Northern coast ridge (sample)</h2>
+                                <h2 class="event-card__trail" style="margin:0">Mt. Kalatungan sweep (sample)</h2>
                             </div>
-                            <p class="request-card__when">Feb 14, 2026 · Manapla breeze</p>
+                            <p class="request-card__when">Feb 14, 2026 · Bukidnon</p>
                         </div>
                         <div class="event-row__rail">
                             <span class="badge badge--done">Completed</span>
@@ -114,30 +114,30 @@ include 'partials/navbar.php';
                     <article class="event-row">
                         <div class="event-row__main">
                             <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Patag sunrise social</h2>
-                                <span class="badge-diff badge-diff--mod">Moderate</span>
+                                <h2 class="event-card__trail" style="margin:0">Mt. Pulag · Akiki–Ambangeg batch</h2>
+                                <span class="badge-diff badge-diff--hard">Hard</span>
                             </div>
-                            <p class="request-card__when">Apr 12 · 5 / 12 approved · Silay side</p>
+                            <p class="request-card__when">May 3 · 6 / 12 approved · Benguet / Ifugao</p>
                         </div>
                         <div class="inline-actions">
                             <a class="btn-secondary" href="index.php?page=event_details">View</a>
                             <a class="text-link" href="index.php?page=updates">Post update</a>
                         </div>
                     </article>
-                    <article class="event-row" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(30,45,55,0.1)">
+                    <article class="event-row" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.08)">
                         <div class="event-row__main">
                             <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Mambukal mist &amp; merienda</h2>
-                                <span class="badge-diff badge-diff--easy">Easy</span>
+                                <h2 class="event-card__trail" style="margin:0">Mt. Guiting-Guiting · Knife-edge roster</h2>
+                                <span class="badge-diff badge-diff--vhard">Very hard</span>
                             </div>
-                            <p class="request-card__when">Apr 20 · 14 / 15 approved</p>
+                            <p class="request-card__when">Jun 1 · 8 / 8 approved · Romblon</p>
                         </div>
                         <a class="btn-secondary" href="index.php?page=create_event">Duplicate as new</a>
                     </article>
                 </div>
                 <div class="tabs__panel tabs__panel--2">
                     <article class="request-card card card--inset" style="margin-bottom:1rem">
-                        <p class="request-card__who"><strong>Alex Reyes</strong> wants Patag sunrise social</p>
+                        <p class="request-card__who"><strong>Alex Reyes</strong> wants Mt. Pulag · Akiki–Ambangeg batch</p>
                         <p class="request-card__when">Requested today · 2 mutual hikes on TrailConnect</p>
                         <div class="inline-actions" style="margin-top:0.75rem">
                             <button type="button" class="btn-primary">Approve</button>
@@ -145,7 +145,7 @@ include 'partials/navbar.php';
                         </div>
                     </article>
                     <article class="request-card card card--inset">
-                        <p class="request-card__who"><strong>Jam Santos</strong> · Mambukal mist &amp; merienda</p>
+                        <p class="request-card__who"><strong>Jam Santos</strong> · Mt. Guiting-Guiting · Knife-edge roster</p>
                         <p class="request-card__when">Gear checklist acknowledged · yesterday</p>
                         <div class="inline-actions" style="margin-top:0.75rem">
                             <button type="button" class="btn-primary">Approve</button>
