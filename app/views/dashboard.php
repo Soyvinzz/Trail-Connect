@@ -4,6 +4,16 @@ $pageTitle = 'Home — TrailConnect';
 $bodyClass = 'app-body dash-body';
 $role = tc_role();
 $name = tc_display_name();
+$pendingMine = 0;
+$pendingAll = 0;
+foreach (tc_join_requests() as $request) {
+  if ((string) ($request['status'] ?? '') === 'pending') {
+    $pendingAll++;
+    if ((string) ($request['hiker_name'] ?? '') === $name) {
+      $pendingMine++;
+    }
+  }
+}
 include 'partials/header.php';
 include 'partials/navbar.php';
 
@@ -51,7 +61,7 @@ $organizerCards = [
   [
     'label'   => 'Organizer',
     'title'   => 'Pending requests',
-    'meta'    => '2 new · Pulag batch & G2 roster',
+    'meta'    => $pendingAll . ' pending · review join requests',
     'diff'    => '',
     'org'     => 'Review join requests for technical majors and traverse slots.',
     'cta'     => ['text' => 'Review now', 'href' => 'index.php?page=my_event', 'type' => 'primary'],
@@ -74,6 +84,15 @@ $organizerCards = [
     'org'     => '',
     'cta'     => ['text' => 'View updates', 'href' => 'index.php?page=updates', 'type' => 'secondary'],
     'img'     => 'assets/img/mt-mayon.jpg',
+  ],
+  [
+    'label'   => 'Organizer',
+    'title'   => 'Published events',
+    'meta'    => count(tc_events()) . ' active events · monitor and update details',
+    'diff'    => '',
+    'org'     => '',
+    'cta'     => ['text' => 'Manage events', 'href' => 'index.php?page=my_event', 'type' => 'secondary'],
+    'img'     => 'assets/img/mountain-landingpage.jpg',
   ],
 ];
 
@@ -117,8 +136,8 @@ $jsCards = json_encode(array_values($cards));
     <?php if ($role === 'hiker'): ?>
     <div class="dash-notice">
       <strong>Pending requests</strong> — You have
-      <a href="index.php?page=my_event">1 join request</a>
-      awaiting organizer review (Mt. Pulag batch sample).
+      <a href="index.php?page=my_event"><?php echo $pendingMine; ?> join request<?php echo $pendingMine === 1 ? '' : 's'; ?></a>
+      awaiting organizer review.
     </div>
     <?php endif; ?>
   </div>

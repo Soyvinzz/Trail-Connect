@@ -2,12 +2,17 @@
 declare(strict_types=1);
 $pageTitle = 'Create event — TrailConnect';
 $bodyClass = 'app-body';
+$editingEventId = (int) ($_GET['event_id'] ?? 0);
+$editingEvent = $editingEventId > 0 ? tc_find_event($editingEventId) : null;
+$isEditing = is_array($editingEvent);
+$difficulty = (string) ($editingEvent['difficulty'] ?? 'mod');
+$approval = (string) ($editingEvent['approval'] ?? 'manual');
 include 'partials/header.php';
 include 'partials/navbar.php';
 ?>
 <div class="container container--app container--narrow">
     <header class="page-head">
-        <h1 class="page-title">Create event</h1>
+        <h1 class="page-title"><?php echo $isEditing ? 'Update event' : 'Create event'; ?></h1>
         <p class="page-lede">Organizers only · Publish major hikes anywhere in the <strong>Philippines</strong> in <strong>three steps</strong> — basics, details, safety &amp; approvals.</p>
         <ol class="ce-steps" aria-label="Progress">
             <li class="ce-steps__item is-done">Basic info</li>
@@ -18,35 +23,44 @@ include 'partials/navbar.php';
 
     <form class="ce-form card card--stack glass-stack" method="post" action="index.php?page=create_event">
         <input type="hidden" name="action" value="publish_event">
+        <input type="hidden" name="event_id" value="<?php echo (int) ($editingEvent['id'] ?? 0); ?>">
 
         <fieldset class="ce-panel">
             <legend class="ce-panel__title">Step 1 — Basic info</legend>
             <label class="field-label" for="evt-title">Event title</label>
-            <input id="evt-title" class="input" name="title" placeholder="Mt. Pulag · Akiki–Ambangeg traverse" required>
+            <input id="evt-title" class="input" name="title" placeholder="Mt. Pulag · Akiki–Ambangeg traverse" value="<?php echo htmlspecialchars((string) ($editingEvent['title'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>" required>
 
             <label class="field-label" for="evt-trail">Trail (curated)</label>
             <select id="evt-trail" class="input input--select" name="trail" required>
                 <option value="">Select trail…</option>
-                <option>Mt. Guiting-Guiting Knife-Edge (Romblon)</option>
-                <option>Mt. Halcon Technical Ascent (Mindoro)</option>
-                <option>Mt. Mantalingajan (Palawan)</option>
-                <option>Mt. Apo · Kapatagan–Kidapawan</option>
-                <option>Mt. Dulang-Dulang · Mt. Kitanglad (Bukidnon)</option>
-                <option>Mt. Kalatungan (Bukidnon)</option>
-                <option>Mt. Ragang (Lanao del Sur)</option>
-                <option>Mt. Piapayungan (Mindanao)</option>
-                <option>Mt. Tabayoc (Benguet)</option>
-                <option>Mt. Pulag · Akiki–Ambangeg (Benguet / Ifugao)</option>
+                <?php
+                $trailOptions = [
+                    'Mt. Guiting-Guiting Knife-Edge (Romblon)',
+                    'Mt. Halcon Technical Ascent (Mindoro)',
+                    'Mt. Mantalingajan (Palawan)',
+                    'Mt. Apo · Kapatagan–Kidapawan',
+                    'Mt. Dulang-Dulang · Mt. Kitanglad (Bukidnon)',
+                    'Mt. Kalatungan (Bukidnon)',
+                    'Mt. Ragang (Lanao del Sur)',
+                    'Mt. Piapayungan (Mindanao)',
+                    'Mt. Tabayoc (Benguet)',
+                    'Mt. Pulag · Akiki–Ambangeg (Benguet / Ifugao)',
+                ];
+                $selectedTrail = (string) ($editingEvent['trail'] ?? '');
+                foreach ($trailOptions as $trailOption) :
+                ?>
+                    <option <?php echo $selectedTrail === $trailOption ? 'selected' : ''; ?>><?php echo htmlspecialchars($trailOption, ENT_QUOTES, 'UTF-8'); ?></option>
+                <?php endforeach; ?>
             </select>
 
             <div class="date-pair">
                 <div>
                     <label class="field-label" for="evt-date">Date</label>
-                    <input id="evt-date" class="input" type="date" name="date" required>
+                    <input id="evt-date" class="input" type="date" name="date" value="<?php echo htmlspecialchars((string) ($editingEvent['date'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>" required>
                 </div>
                 <div>
                     <label class="field-label" for="evt-time">Start time</label>
-                    <input id="evt-time" class="input" type="time" name="time" value="08:00" required>
+                    <input id="evt-time" class="input" type="time" name="time" value="<?php echo htmlspecialchars((string) ($editingEvent['time'] ?? '08:00'), ENT_QUOTES, 'UTF-8'); ?>" required>
                 </div>
             </div>
         </fieldset>
@@ -55,27 +69,28 @@ include 'partials/navbar.php';
             <legend class="ce-panel__title">Step 2 — Details</legend>
             <span class="field-label">Difficulty</span>
             <div class="chip-group chip-group--radio">
-                <label class="chip"><input type="radio" name="difficulty" value="easy"> Easy</label>
-                <label class="chip"><input type="radio" name="difficulty" value="mod" checked> Moderate</label>
-                <label class="chip"><input type="radio" name="difficulty" value="hard"> Hard</label>
+                <label class="chip"><input type="radio" name="difficulty" value="easy" <?php echo $difficulty === 'easy' ? 'checked' : ''; ?>> Easy</label>
+                <label class="chip"><input type="radio" name="difficulty" value="mod" <?php echo $difficulty === 'mod' ? 'checked' : ''; ?>> Moderate</label>
+                <label class="chip"><input type="radio" name="difficulty" value="hard" <?php echo $difficulty === 'hard' ? 'checked' : ''; ?>> Hard</label>
+                <label class="chip"><input type="radio" name="difficulty" value="vhard" <?php echo $difficulty === 'vhard' ? 'checked' : ''; ?>> Very hard</label>
             </div>
 
             <label class="field-label" for="evt-meet">Meeting point</label>
-            <input id="evt-meet" class="input" name="meet" placeholder="e.g. Ranger station / DENR briefing point / agreed jump-off" required>
+            <input id="evt-meet" class="input" name="meet" placeholder="e.g. Ranger station / DENR briefing point / agreed jump-off" value="<?php echo htmlspecialchars((string) ($editingEvent['meet'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>" required>
 
             <label class="field-label" for="evt-max">Participant maximum</label>
-            <input id="evt-max" class="input" type="number" name="max" min="2" max="50" value="12" required>
+            <input id="evt-max" class="input" type="number" name="max" min="2" max="50" value="<?php echo (int) ($editingEvent['max'] ?? 12); ?>" required>
 
             <label class="field-label" for="evt-desc">Description</label>
-            <textarea id="evt-desc" class="input" name="desc" placeholder="Pace, regroup points, exposure, and what makes this Philippine climb special." required></textarea>
+            <textarea id="evt-desc" class="input" name="desc" placeholder="Pace, regroup points, exposure, and what makes this Philippine climb special." required><?php echo htmlspecialchars((string) ($editingEvent['desc'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></textarea>
         </fieldset>
 
         <fieldset class="ce-panel">
             <legend class="ce-panel__title">Step 3 — Management</legend>
             <span class="field-label">Approval type</span>
             <div class="chip-group chip-group--radio">
-                <label class="chip" title="Join immediately if capacity allows."><input type="radio" name="approval" value="auto"> Auto-approve</label>
-                <label class="chip" title="You approve each request."><input type="radio" name="approval" value="manual" checked> Manual review</label>
+                <label class="chip" title="Join immediately if capacity allows."><input type="radio" name="approval" value="auto" <?php echo $approval === 'auto' ? 'checked' : ''; ?>> Auto-approve</label>
+                <label class="chip" title="You approve each request."><input type="radio" name="approval" value="manual" <?php echo $approval === 'manual' ? 'checked' : ''; ?>> Manual review</label>
             </div>
 
             <span class="field-label">Required gear</span>
@@ -108,7 +123,7 @@ include 'partials/navbar.php';
         <div class="ce-bar">
             <button type="button" class="btn-secondary" onclick="history.back()">Previous</button>
             <button type="button" class="btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Next</button>
-            <button class="btn-primary" type="submit">Publish event</button>
+            <button class="btn-primary" type="submit"><?php echo $isEditing ? 'Save changes' : 'Publish event'; ?></button>
         </div>
     </form>
 </div>

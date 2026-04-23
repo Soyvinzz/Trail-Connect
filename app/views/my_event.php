@@ -3,157 +3,148 @@ declare(strict_types=1);
 $pageTitle = 'My events — TrailConnect';
 $bodyClass = 'app-body';
 $role = tc_role();
+$events = tc_events();
+$requests = tc_join_requests();
+$currentName = tc_display_name();
+$myRequests = [];
+$incomingRequests = [];
+foreach ($requests as $request) {
+    if ($role === 'hiker' && (string) $request['hiker_name'] === $currentName) {
+        $myRequests[] = $request;
+    }
+    if ($role === 'organizer') {
+        $incomingRequests[] = $request;
+    }
+}
+$msg = (string) ($_GET['msg'] ?? '');
+$messages = [
+    'event_created' => 'Event created successfully.',
+    'event_updated' => 'Event updated successfully.',
+    'event_deleted' => 'Event deleted successfully.',
+    'join_request_submitted' => 'Join request submitted. Status is now pending.',
+    'request_status_updated' => 'Join request status updated.',
+    'join_request_deleted' => 'Join request deleted.',
+];
+$difficultyLabels = [
+    'easy' => 'EASY',
+    'mod' => 'MODERATE',
+    'hard' => 'HARD',
+    'vhard' => 'VERY HARD',
+];
 include 'partials/header.php';
 include 'partials/navbar.php';
+$currentReturn = (string) ($_SERVER['REQUEST_URI'] ?? 'index.php?page=my_event');
 ?>
 <div class="container container--app">
     <header class="page-head">
         <h1 class="page-title">My events</h1>
         <p class="page-lede">
             <?php echo $role === 'organizer'
-                ? 'Host major hikes anywhere in the Philippines — approve joiners, post updates, and keep capacity honest.'
-                : 'Track Pulag, G2, Apo, and Mindanao expeditions — upcoming slots, pending approvals, and past badges.'; ?>
+                ? 'Manage published hikes, review join requests, and keep event capacity accurate.'
+                : 'Track your joined hikes and monitor request status in real time.'; ?>
         </p>
     </header>
 
-    <?php if ($role === 'hiker') : ?>
-        <section class="card card--stack glass-stack tabs--css" aria-label="Your hikes">
-            <input class="tabs__input" type="radio" name="me-hiker" id="ht-up" checked>
-            <input class="tabs__input" type="radio" name="me-hiker" id="ht-pend">
-            <input class="tabs__input" type="radio" name="me-hiker" id="ht-past">
-            <div class="tabs__bar">
-                <label class="tabs__tab" for="ht-up">Upcoming</label>
-                <label class="tabs__tab" for="ht-pend">Pending</label>
-                <label class="tabs__tab" for="ht-past">Past</label>
-            </div>
-            <div class="tabs__panels">
-                <div class="tabs__panel tabs__panel--1">
-                    <article class="event-row">
+    <?php if (isset($messages[$msg])) : ?>
+        <div class="banner-safety" role="status" style="margin-bottom:1rem">
+            <strong>Notification:</strong> <?php echo htmlspecialchars($messages[$msg], ENT_QUOTES, 'UTF-8'); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($role === 'organizer') : ?>
+        <section class="card card--stack glass-stack">
+            <h2 class="section-title">Published events</h2>
+            <?php if (empty($events)) : ?>
+                <p class="text-muted">No published events yet.</p>
+            <?php else : ?>
+                <?php foreach ($events as $event) : ?>
+                    <article class="event-row" style="margin-bottom:1rem">
                         <div class="event-row__main">
                             <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Mt. Pulag · Akiki–Ambangeg</h2>
+                                <h3 class="event-card__trail" style="margin:0"><?php echo htmlspecialchars((string) $event['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                <?php $difficultyKey = (string) ($event['difficulty'] ?? 'mod'); ?>
+                                <span class="badge-diff badge-diff--<?php echo htmlspecialchars($difficultyKey, ENT_QUOTES, 'UTF-8'); ?>">
+                                    <?php echo htmlspecialchars($difficultyLabels[$difficultyKey] ?? strtoupper($difficultyKey), ENT_QUOTES, 'UTF-8'); ?>
+                                </span>
                             </div>
-                            <p class="request-card__who">Organizer <strong>Cordillera Guides</strong> · Benguet briefing point</p>
-                            <p class="request-card__when">Sat, May 3, 2026 · staged meet</p>
+                            <p class="request-card__when"><?php echo htmlspecialchars((string) $event['date'], ENT_QUOTES, 'UTF-8'); ?> <?php echo htmlspecialchars((string) $event['time'], ENT_QUOTES, 'UTF-8'); ?> · <?php echo htmlspecialchars((string) $event['trail'], ENT_QUOTES, 'UTF-8'); ?></p>
                         </div>
-                        <div class="inline-actions inline-actions--stack">
-                            <span class="badge badge--approved">Approved</span>
-                            <a class="btn-secondary" href="index.php?page=event_details">Details</a>
-                            <a class="btn-secondary btn-secondary--sm" href="index.php?page=updates">Updates</a>
+                        <div class="inline-actions event-row__actions">
+                            <a class="btn-secondary btn-secondary--sm" href="index.php?page=event_details&event_id=<?php echo (int) $event['id']; ?>&return=<?php echo urlencode($currentReturn); ?>">View</a>
+                            <a class="btn-secondary btn-secondary--sm" href="index.php?page=create_event&event_id=<?php echo (int) $event['id']; ?>">Update</a>
+                            <form method="post" action="index.php?page=my_event">
+                                <input type="hidden" name="action" value="delete_event">
+                                <input type="hidden" name="event_id" value="<?php echo (int) $event['id']; ?>">
+                                <button type="submit" class="btn-secondary btn-secondary--sm">Delete</button>
+                            </form>
                         </div>
                     </article>
-                    <article class="event-row" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.08)">
-                        <div class="event-row__main">
-                            <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Mt. Apo · Kapatagan–Kidapawan</h2>
-                            </div>
-                            <p class="request-card__who"><strong>Mindanao Ascents</strong> · Davao / Cotabato</p>
-                            <p class="request-card__when">Sun, May 18, 2026 · multi-day</p>
-                        </div>
-                        <div class="inline-actions inline-actions--stack">
-                            <span class="badge badge--approved">Approved</span>
-                            <a class="btn-secondary" href="index.php?page=event_details">Details</a>
-                        </div>
-                    </article>
-                </div>
-                <div class="tabs__panel tabs__panel--2">
-                    <article class="event-row">
-                        <div class="event-row__main">
-                            <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Mt. Halcon · Technical ascent</h2>
-                            </div>
-                            <p class="request-card__who">Host <strong>Oriental Mindoro Peaks</strong> · manual approval</p>
-                            <p class="request-card__when">Requested Apr 2 · Event Jun 8</p>
-                        </div>
-                        <div class="event-row__rail">
-                            <span class="badge badge--pending">Pending review</span>
-                            <span class="text-muted" style="font-size:0.85rem">Wait for organizer</span>
-                        </div>
-                    </article>
-                    <p class="field-hint" style="margin-top:1rem">Sample: auto-approve events flip you to <em>Approved</em> immediately.</p>
-                </div>
-                <div class="tabs__panel tabs__panel--3">
-                    <article class="event-row">
-                        <div class="event-row__main">
-                            <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Mt. Tabayoc · Mossy forest</h2>
-                            </div>
-                            <p class="request-card__who">Kabayan · Benguet · with Cordillera Guides</p>
-                            <p class="request-card__when">Mar 8, 2026</p>
-                        </div>
-                        <div class="event-row__rail">
-                            <span class="badge badge--done">Completed</span>
-                            <a class="btn-secondary" href="index.php?page=reviews">Leave review</a>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </section>
+
+        <section class="card card--stack glass-stack" style="margin-top:1rem">
+            <h2 class="section-title">Incoming join requests</h2>
+            <?php if (empty($incomingRequests)) : ?>
+                <p class="text-muted">No incoming requests right now.</p>
+            <?php else : ?>
+                <?php foreach ($incomingRequests as $request) : ?>
+                    <?php $event = tc_find_event((int) $request['event_id']); ?>
+                    <article class="request-card card card--inset" style="margin-bottom:1rem">
+                        <p class="request-card__who"><strong><?php echo htmlspecialchars((string) $request['hiker_name'], ENT_QUOTES, 'UTF-8'); ?></strong> requested <strong><?php echo htmlspecialchars((string) ($event['title'] ?? 'Unknown event'), ENT_QUOTES, 'UTF-8'); ?></strong></p>
+                        <p class="request-card__when"><?php echo htmlspecialchars((string) $request['requested_at'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        <div class="inline-actions" style="margin-top:0.75rem">
+                            <span class="badge badge--pending"><?php echo htmlspecialchars(ucfirst((string) $request['status']), ENT_QUOTES, 'UTF-8'); ?></span>
+                            <form method="post" action="index.php?page=my_event">
+                                <input type="hidden" name="action" value="request_status">
+                                <input type="hidden" name="request_id" value="<?php echo (int) $request['id']; ?>">
+                                <input type="hidden" name="status" value="approved">
+                                <button type="submit" class="btn-primary">Approve</button>
+                            </form>
+                            <form method="post" action="index.php?page=my_event">
+                                <input type="hidden" name="action" value="request_status">
+                                <input type="hidden" name="request_id" value="<?php echo (int) $request['id']; ?>">
+                                <input type="hidden" name="status" value="declined">
+                                <button type="submit" class="btn-secondary">Decline</button>
+                            </form>
+                            <form method="post" action="index.php?page=my_event">
+                                <input type="hidden" name="action" value="delete_request">
+                                <input type="hidden" name="request_id" value="<?php echo (int) $request['id']; ?>">
+                                <button type="submit" class="btn-secondary btn-secondary--sm">Delete</button>
+                            </form>
                         </div>
                     </article>
-                    <article class="event-row" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.08)">
-                        <div class="event-row__main">
-                            <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Mt. Kalatungan sweep (sample)</h2>
-                            </div>
-                            <p class="request-card__when">Feb 14, 2026 · Bukidnon</p>
-                        </div>
-                        <div class="event-row__rail">
-                            <span class="badge badge--done">Completed</span>
-                            <span class="text-muted" style="font-size:0.85rem">Reviewed</span>
-                        </div>
-                    </article>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </section>
     <?php else : ?>
-        <section class="card card--stack glass-stack tabs--css" aria-label="Organizer events">
-            <input class="tabs__input" type="radio" name="me-org" id="ot-mine" checked>
-            <input class="tabs__input" type="radio" name="me-org" id="ot-appr">
-            <div class="tabs__bar">
-                <label class="tabs__tab" for="ot-mine">My published</label>
-                <label class="tabs__tab" for="ot-appr">Join requests</label>
-            </div>
-            <div class="tabs__panels">
-                <div class="tabs__panel tabs__panel--1">
-                    <article class="event-row">
+        <section class="card card--stack glass-stack">
+            <h2 class="section-title">My join requests</h2>
+            <?php if (empty($myRequests)) : ?>
+                <p class="text-muted">You have not joined any event yet.</p>
+            <?php else : ?>
+                <?php foreach ($myRequests as $request) : ?>
+                    <?php $event = tc_find_event((int) $request['event_id']); ?>
+                    <article class="event-row" style="margin-bottom:1rem">
                         <div class="event-row__main">
                             <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Mt. Pulag · Akiki–Ambangeg batch</h2>
-                                <span class="badge-diff badge-diff--hard">Hard</span>
+                                <h3 class="event-card__trail" style="margin:0"><?php echo htmlspecialchars((string) ($event['title'] ?? 'Unknown event'), ENT_QUOTES, 'UTF-8'); ?></h3>
                             </div>
-                            <p class="request-card__when">May 3 · 6 / 12 approved · Benguet / Ifugao</p>
+                            <p class="request-card__when"><?php echo htmlspecialchars((string) ($event['trail'] ?? ''), ENT_QUOTES, 'UTF-8'); ?> · <?php echo htmlspecialchars((string) ($event['date'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></p>
                         </div>
-                        <div class="inline-actions">
-                            <a class="btn-secondary" href="index.php?page=event_details">View</a>
-                            <a class="text-link" href="index.php?page=updates">Post update</a>
-                        </div>
-                    </article>
-                    <article class="event-row" style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.08)">
-                        <div class="event-row__main">
-                            <div class="event-row__top">
-                                <h2 class="event-card__trail" style="margin:0">Mt. Guiting-Guiting · Knife-edge roster</h2>
-                                <span class="badge-diff badge-diff--vhard">Very hard</span>
-                            </div>
-                            <p class="request-card__when">Jun 1 · 8 / 8 approved · Romblon</p>
-                        </div>
-                        <a class="btn-secondary" href="index.php?page=create_event">Duplicate as new</a>
-                    </article>
-                </div>
-                <div class="tabs__panel tabs__panel--2">
-                    <article class="request-card card card--inset" style="margin-bottom:1rem">
-                        <p class="request-card__who"><strong>Alex Reyes</strong> wants Mt. Pulag · Akiki–Ambangeg batch</p>
-                        <p class="request-card__when">Requested today · 2 mutual hikes on TrailConnect</p>
-                        <div class="inline-actions" style="margin-top:0.75rem">
-                            <button type="button" class="btn-primary">Approve</button>
-                            <button type="button" class="btn-secondary">Decline</button>
+                        <div class="inline-actions inline-actions--stack">
+                            <?php if ($request['status'] === 'approved') : ?>
+                                <span class="badge badge--approved">Approved</span>
+                            <?php elseif ($request['status'] === 'declined') : ?>
+                                <span class="badge badge--full">Declined</span>
+                            <?php else : ?>
+                                <span class="badge badge--pending">Pending</span>
+                            <?php endif; ?>
+                            <a class="btn-secondary btn-secondary--sm" href="index.php?page=event_details&event_id=<?php echo (int) $request['event_id']; ?>&return=<?php echo urlencode($currentReturn); ?>">Details</a>
                         </div>
                     </article>
-                    <article class="request-card card card--inset">
-                        <p class="request-card__who"><strong>Jam Santos</strong> · Mt. Guiting-Guiting · Knife-edge roster</p>
-                        <p class="request-card__when">Gear checklist acknowledged · yesterday</p>
-                        <div class="inline-actions" style="margin-top:0.75rem">
-                            <button type="button" class="btn-primary">Approve</button>
-                            <button type="button" class="btn-secondary">Decline</button>
-                        </div>
-                    </article>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </section>
     <?php endif; ?>
 

@@ -24,11 +24,11 @@
   font-size: 0.95rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  background: linear-gradient(135deg, #78ef9f, #57df87);
-  color: #0d1210;
+  background: linear-gradient(135deg, #419456, #377f49);
+  color: #f5fff7;
   padding: 0.7rem 1.5rem;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(170, 235, 186, 0.42);
   cursor: pointer;
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
@@ -39,7 +39,7 @@
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #8bf5ae, #68e696);
+  background: linear-gradient(135deg, #4da863, #3d8b51);
   box-shadow:
     0 10px 28px rgba(8, 16, 12, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.36);
@@ -54,7 +54,7 @@
   opacity: 0.55;
   cursor: not-allowed;
   transform: none;
-  color: rgba(13, 18, 16, 0.72);
+  color: rgba(245, 255, 247, 0.82);
 }
 
 .btn-glass {
@@ -1255,10 +1255,29 @@ body.app-body .badge-diff--vhard {
   align-items: flex-start;
 }
 
+.find-toolbar__actions {
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.35rem;
+}
+
 .inline-actions--stack {
   flex-direction: column;
   align-items: flex-end;
   gap: 0.45rem;
+}
+
+.event-row__actions {
+  min-width: 220px;
+  justify-content: flex-end;
+  gap: 0.45rem;
+}
+
+.event-row__actions .btn-secondary,
+.event-row__actions .btn-primary {
+  min-width: 90px;
+  text-align: center;
 }
 
 .event-row .inline-actions .btn-primary,
@@ -1281,11 +1300,15 @@ body.app-body .badge-diff--vhard {
 .banner-safety {
   padding: 0.75rem 1rem;
   border-radius: var(--radius-sm);
-  background: rgba(180, 50, 40, 0.2);
-  border: 1px solid rgba(200, 80, 70, 0.45);
-  color: #4a1812;
+  background: rgba(44, 111, 66, 0.26);
+  border: 1px solid rgba(111, 214, 146, 0.55);
+  color: #d9fbe3;
   font-size: 0.9rem;
   margin-bottom: 1rem;
+}
+
+.banner-safety strong {
+  color: #f2fff6;
 }
 
 .feed-item {
@@ -1372,10 +1395,10 @@ body.app-body .badge-diff--vhard {
   height: clamp(148px, 26vw, 210px);
   background: linear-gradient(
     115deg,
-    #2a2a2a 0%,
-    #1a1a1a 35%,
-    #0d0d0d 70%,
-    #000000 100%
+    #009c4b 0%,
+    #155d37 35%,
+    #024923 70%,
+    #008448 100%
   );
 }
 
