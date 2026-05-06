@@ -5,9 +5,14 @@ $cur = $_GET['page'] ?? '';
 ?>
 <header class="site-header">
     <nav class="navbar" aria-label="Primary">
-        <a class="brand" href="index.php?page=landing">TrailConnect</a>
+        <?php
+        $brandHref = 'index.php?page=landing';
+        $brandVariant = 'nav';
+        include __DIR__ . '/brand_lockup.php';
+        ?>
         <ul class="nav-links">
             <li><a href="index.php?page=dashboard"<?php echo $cur === 'dashboard' ? ' class="is-active"' : ''; ?>>Home</a></li>
+            <li><a href="index.php?page=hiking_101"<?php echo $cur === 'hiking_101' ? ' class="is-active"' : ''; ?>>Hiking 101</a></li>
             <?php if ($role === 'organizer') : ?>
                 <li><a href="index.php?page=create_event"<?php echo $cur === 'create_event' ? ' class="is-active"' : ''; ?>>Create Event</a></li>
             <?php else : ?>
@@ -15,6 +20,9 @@ $cur = $_GET['page'] ?? '';
             <?php endif; ?>
             <li><a href="index.php?page=my_event"<?php echo $cur === 'my_event' ? ' class="is-active"' : ''; ?>>My Events</a></li>
             <li><a href="index.php?page=profile"<?php echo $cur === 'profile' ? ' class="is-active"' : ''; ?>>Profile</a></li>
+            <?php if (tc_is_admin_user()) : ?>
+                <li><a href="index.php?page=admin"<?php echo $cur === 'admin' ? ' class="is-active"' : ''; ?>>Admin</a></li>
+            <?php endif; ?>
             <li>
                 <form class="nav-logout" method="post" action="index.php">
                     <input type="hidden" name="action" value="logout">

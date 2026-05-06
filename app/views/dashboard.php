@@ -4,6 +4,43 @@ $pageTitle = 'Home — TrailConnect';
 $bodyClass = 'app-body dash-body';
 $role = tc_role();
 $name = tc_display_name();
+$notices = tc_pull_notices_for_current_user();
+$pendingMine = 0;
+$pendingAll = 0;
+$approvedMine = 0;
+$declinedMine = 0;
+$approvedAll = 0;
+$declinedAll = 0;
+foreach (tc_join_requests() as $request) {
+  if ($role === 'organizer') {
+    $evStat = tc_find_event((int) ($request['event_id'] ?? 0));
+    if (!tc_event_manageable_by_current_organizer(is_array($evStat) ? $evStat : null)) {
+      continue;
+    }
+  }
+  $status = (string) ($request['status'] ?? '');
+  $uidDash = tc_current_user_id();
+  $isMineReq = (((string) ($request['hiker_name'] ?? '') === $name)
+    || ($uidDash > 0 && isset($request['user_id']) && (int) $request['user_id'] === $uidDash));
+  if ($status === 'pending') {
+    $pendingAll++;
+    if ($isMineReq) {
+      $pendingMine++;
+    }
+  }
+  if ($status === 'approved') {
+    $approvedAll++;
+    if ($isMineReq) {
+      $approvedMine++;
+    }
+  }
+  if ($status === 'declined') {
+    $declinedAll++;
+    if ($isMineReq) {
+      $declinedMine++;
+    }
+  }
+}
 include 'partials/header.php';
 include 'partials/navbar.php';
 
@@ -16,7 +53,7 @@ $hikerCards = [
     'diff'    => 'vhard',
     'org'     => '★★★★★ Sibuyan Expeditions',
     'cta'     => ['text' => 'View details', 'href' => 'index.php?page=event_details', 'type' => 'primary'],
-    'img'     => 'assets/img/mt-kalatungan.jpg',
+    'img'     => tc_trail_image_url_for_title('Mt. Guiting-Guiting Knife-Edge Traverse'),
   ],
   [
     'label'   => 'Upcoming',
@@ -25,7 +62,7 @@ $hikerCards = [
     'diff'    => 'hard',
     'org'     => '★★★★½ Cordillera Guides',
     'cta'     => ['text' => 'View details', 'href' => 'index.php?page=event_details', 'type' => 'primary'],
-    'img'     => 'assets/img/mountain1.jpg',
+    'img'     => tc_trail_image_url_for_title('Mt. Pulag via Akiki–Ambangeg Traverse'),
   ],
   [
     'label'   => 'Discover',
@@ -34,7 +71,7 @@ $hikerCards = [
     'diff'    => 'hard',
     'org'     => '',
     'cta'     => ['text' => 'Browse hikes', 'href' => 'index.php?page=find_hikes', 'type' => 'secondary'],
-    'img'     => 'assets/img/mt-mayon.jpg',
+    'img'     => tc_trail_image_url_for_title('Mt. Apo Traverse via Kapatagan–Kidapawan'),
   ],
   [
     'label'   => 'Discover',
@@ -43,7 +80,7 @@ $hikerCards = [
     'diff'    => 'vhard',
     'org'     => '',
     'cta'     => ['text' => 'Browse hikes', 'href' => 'index.php?page=find_hikes', 'type' => 'secondary'],
-    'img'     => 'assets/img/mountain-landingpage.jpg',
+    'img'     => tc_trail_image_url_for_title('Mt. Halcon Technical Ascent'),
   ],
 ];
 
@@ -51,11 +88,20 @@ $organizerCards = [
   [
     'label'   => 'Organizer',
     'title'   => 'Pending requests',
-    'meta'    => '2 new · Pulag batch & G2 roster',
+    'meta'    => $pendingAll . ' pending · review join requests',
     'diff'    => '',
     'org'     => 'Review join requests for technical majors and traverse slots.',
     'cta'     => ['text' => 'Review now', 'href' => 'index.php?page=my_event', 'type' => 'primary'],
-    'img'     => 'assets/img/mt-kalatungan.jpg',
+    'img'     => tc_trail_image_url_for_title('Mt. Ragang Technical Volcano Ascent'),
+  ],
+  [
+    'label'   => 'Organizer',
+    'title'   => 'Approved joiners',
+    'meta'    => $approvedAll . ' approved · dashboard now updates after each decision',
+    'diff'    => '',
+    'org'     => '',
+    'cta'     => ['text' => 'Manage requests', 'href' => 'index.php?page=my_event', 'type' => 'secondary'],
+    'img'     => tc_trail_image_url_for_title('Mt. Pulag via Akiki–Ambangeg Traverse'),
   ],
   [
     'label'   => 'Organizer',
@@ -64,16 +110,25 @@ $organizerCards = [
     'diff'    => '',
     'org'     => '',
     'cta'     => ['text' => 'Create event', 'href' => 'index.php?page=create_event', 'type' => 'primary'],
-    'img'     => 'assets/img/mountain1.jpg',
+    'img'     => tc_trail_image_url_for_title('Mt. Apo Traverse via Kapatagan–Kidapawan'),
   ],
   [
     'label'   => 'Calendar',
-    'title'   => 'Upcoming organized',
-    'meta'    => 'May · Pulag · Jun · G2 · Jul · Apo traverse draft',
+    'title'   => 'Declined requests',
+    'meta'    => $declinedAll . ' declined · decisions are reflected to joiners',
     'diff'    => '',
     'org'     => '',
-    'cta'     => ['text' => 'View updates', 'href' => 'index.php?page=updates', 'type' => 'secondary'],
-    'img'     => 'assets/img/mt-mayon.jpg',
+    'cta'     => ['text' => 'View updates', 'href' => 'index.php?page=my_event', 'type' => 'secondary'],
+    'img'     => tc_trail_image_url_for_title('Mt. Halcon Technical Ascent'),
+  ],
+  [
+    'label'   => 'Organizer',
+    'title'   => 'Published events',
+    'meta'    => tc_event_count_for_current_organizer() . ' active events · monitor and update details',
+    'diff'    => '',
+    'org'     => '',
+    'cta'     => ['text' => 'Manage events', 'href' => 'index.php?page=my_event', 'type' => 'secondary'],
+    'img'     => tc_trail_image_url_for_title('Mt. Kalatungan Sweep'),
   ],
 ];
 
@@ -110,15 +165,26 @@ $jsCards = json_encode(array_values($cards));
 
       <p class="dash-role-line">
         <span>Preview UI:</span>
-        <a href="index.php?toggle_role=1">Switch to <?php echo $role === 'hiker' ? 'Organizer' : 'Hiker'; ?> dashboard</a>
+        <a href="index.php?switch_role=<?php echo $role === 'hiker' ? 'organizer' : 'hiker'; ?>">
+            Switch to <?php echo $role === 'hiker' ? 'Organizer' : 'Hiker'; ?> dashboard (login required)
+        </a>
       </p>
     </div>
 
+    <?php if (!empty($notices)): ?>
+    <div class="dash-notice">
+      <strong>Recent activity</strong>
+      <?php foreach ($notices as $notice): ?>
+        <div><?php echo htmlspecialchars((string) ($notice['message'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></div>
+      <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
+
     <?php if ($role === 'hiker'): ?>
     <div class="dash-notice">
-      <strong>Pending requests</strong> — You have
-      <a href="index.php?page=my_event">1 join request</a>
-      awaiting organizer review (Mt. Pulag batch sample).
+      <strong>My request status</strong> — You have
+      <a href="index.php?page=my_event"><?php echo $pendingMine; ?> pending</a>,
+      <?php echo $approvedMine; ?> approved, and <?php echo $declinedMine; ?> declined request<?php echo ($pendingMine + $approvedMine + $declinedMine) === 1 ? '' : 's'; ?>.
     </div>
     <?php endif; ?>
   </div>

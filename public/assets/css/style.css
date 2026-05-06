@@ -26,7 +26,11 @@
   --glass-border-soft: rgba(255, 255, 255, 0.18);
   --glass-blur: 14px;
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  --img-hero: url("../img/mountain-landingpage.jpg");
+  /* Landing explore screen — project file: aponi.jpg → public/assets/img/aponi.jpg */
+  --img-landing: url("../img/aponi.jpg");
+  /* Login / auth backgrounds — project file: pulag.png → public/assets/img/pulag.png */
+  --img-pulag: url("../img/pulag.png");
+  --img-hero: var(--img-landing);
   --edge-torn-bottom: polygon(
     0% 0%,
     100% 0%,
@@ -134,12 +138,12 @@ body.landing-body {
 }
 
 body.auth-body {
-  background-color: #000000;
+  background-color: #0a1018;
   background-image:
-    linear-gradient(160deg, rgba(0, 0, 0, 0.82) 0%, rgba(10, 10, 10, 0.92) 100%),
-    var(--img-hero);
+    linear-gradient(160deg, rgba(14, 18, 28, 0.52) 0%, rgba(6, 10, 18, 0.82) 100%),
+    var(--img-pulag);
   background-size: cover;
-  background-position: center;
+  background-position: center 30%;
   background-attachment: fixed;
 }
 
@@ -298,14 +302,14 @@ a:hover {
   background: #1a2830;
 }
 
-.landing__video {
+.landing__photo {
   position: absolute;
   inset: 0;
   z-index: 2;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 30%;
   pointer-events: none;
 }
 
@@ -335,6 +339,15 @@ a:hover {
   );
 }
 
+.landing__overlay--photo {
+  background: linear-gradient(
+    180deg,
+    rgba(28, 22, 48, 0.42) 0%,
+    rgba(10, 18, 28, 0.38) 42%,
+    rgba(6, 12, 18, 0.58) 100%
+  );
+}
+
 .landing__inner {
   position: relative;
   z-index: 5;
@@ -354,29 +367,19 @@ a:hover {
   gap: 0.65rem;
 }
 
-.landing__logo-mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--glass-bg-strong);
-  border: 1px solid var(--glass-border-soft);
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--glass-shadow);
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, transparent 60%),
-    linear-gradient(180deg, #3d5c6a 0%, #2a3f4a 100%);
-  clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-  border: none;
+.landing .brand-lockup--landing .brand-lockup__trail {
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.85),
+    0 4px 24px rgba(0, 0, 0, 0.45);
 }
 
-.landing__wordmark {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(0.95rem, 2vw, 1.1rem);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+.landing .brand-lockup--landing .brand-lockup__mark {
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.45));
+}
+
+.landing .brand-lockup--landing .brand-lockup__trail,
+.landing .brand-lockup--landing .brand-lockup__connect {
+  font-size: clamp(1.05rem, 2.5vw, 1.4rem);
 }
 
 .landing__hero {
@@ -427,8 +430,3 @@ a:hover {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .landing__video {
-    display: none;
-  }
-}
