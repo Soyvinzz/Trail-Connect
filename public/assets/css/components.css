@@ -1529,6 +1529,7 @@ body.auth-body select.input.input--select option {
   color: #f2fff6;
 }
 
+<<<<<<< HEAD
 .banner-safety--warn {
   background: rgba(180, 90, 50, 0.22);
   border-color: rgba(255, 160, 120, 0.45);
@@ -1539,6 +1540,8 @@ body.auth-body select.input.input--select option {
   color: #fff6f2;
 }
 
+=======
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
 .feed-item {
   padding: 1rem 0;
   border-bottom: 1px solid rgba(30, 45, 55, 0.1);
@@ -1653,10 +1656,18 @@ body.auth-body select.input.input--select option {
   position: absolute;
   inset: 0;
   background: linear-gradient(
+<<<<<<< HEAD
     180deg,
     transparent 0%,
     rgba(8, 10, 14, 0.25) 55%,
     rgba(8, 10, 14, 0.92) 100%
+=======
+    115deg,
+    #009c4b 0%,
+    #155d37 35%,
+    #024923 70%,
+    #008448 100%
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
   );
   pointer-events: none;
 }

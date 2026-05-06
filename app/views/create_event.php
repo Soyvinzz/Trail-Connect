@@ -7,9 +7,12 @@ $editingEvent = $editingEventId > 0 ? tc_find_event($editingEventId) : null;
 $isEditing = is_array($editingEvent);
 $difficulty = (string) ($editingEvent['difficulty'] ?? 'mod');
 $approval = (string) ($editingEvent['approval'] ?? 'manual');
+<<<<<<< HEAD
 $minHikingLevel = (string) ($editingEvent['min_hiking_level'] ?? '');
 $minMinorHikes = (int) ($editingEvent['min_minor_hikes'] ?? 0);
 $minMajorHikes = (int) ($editingEvent['min_major_hikes'] ?? 0);
+=======
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
 include 'partials/header.php';
 include 'partials/navbar.php';
 ?>
@@ -139,7 +142,13 @@ include 'partials/navbar.php';
             </ul>
         </section>
 
+<<<<<<< HEAD
         <div class="ce-bar" style="justify-content:center">
+=======
+        <div class="ce-bar">
+            <button type="button" class="btn-secondary" onclick="history.back()">Previous</button>
+            <button type="button" class="btn-secondary" onclick="window.scrollTo({top:0,behavior:'smooth'})">Next</button>
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
             <button class="btn-primary" type="submit"><?php echo $isEditing ? 'Save changes' : 'Publish event'; ?></button>
         </div>
     </form>

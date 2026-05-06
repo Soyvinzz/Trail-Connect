@@ -2,7 +2,11 @@
 declare(strict_types=1);
 $pageTitle = 'Find hikes — TrailConnect';
 $bodyClass = 'app-body';
+<<<<<<< HEAD
 $allEvents = array_values(tc_events_published());
+=======
+$allEvents = array_values(tc_events());
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
 $allRequests = array_values(tc_join_requests());
 
 $q = trim((string) ($_GET['q'] ?? ''));
@@ -186,6 +190,7 @@ $currentReturn = (string) ($_SERVER['REQUEST_URI'] ?? 'index.php?page=find_hikes
             </article>
         <?php endif; ?>
         <?php foreach ($events as $event) : ?>
+<<<<<<< HEAD
             <?php $cardTrailUrls = tc_trail_image_urls($event); ?>
             <article class="event-card event-card--panel<?php echo $event['is_full'] ? ' event-card--full' : ''; ?>">
                 <div class="event-card__gallery" aria-hidden="true">
@@ -195,6 +200,9 @@ $currentReturn = (string) ($_SERVER['REQUEST_URI'] ?? 'index.php?page=find_hikes
                         </div>
                     <?php endforeach; ?>
                 </div>
+=======
+            <article class="event-card event-card--panel<?php echo $event['is_full'] ? ' event-card--full' : ''; ?>">
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
                 <div class="event-card__top">
                     <h2 class="event-card__trail"><?php echo htmlspecialchars((string) $event['title'], ENT_QUOTES, 'UTF-8'); ?></h2>
                     <?php $difficultyKey = (string) ($event['difficulty'] ?? 'mod'); ?>

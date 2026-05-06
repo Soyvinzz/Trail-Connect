@@ -4,6 +4,7 @@ $pageTitle = 'Home — TrailConnect';
 $bodyClass = 'app-body dash-body';
 $role = tc_role();
 $name = tc_display_name();
+<<<<<<< HEAD
 $notices = tc_pull_notices_for_current_user();
 $pendingMine = 0;
 $pendingAll = 0;
@@ -40,6 +41,17 @@ foreach (tc_join_requests() as $request) {
       $declinedMine++;
     }
   }
+=======
+$pendingMine = 0;
+$pendingAll = 0;
+foreach (tc_join_requests() as $request) {
+  if ((string) ($request['status'] ?? '') === 'pending') {
+    $pendingAll++;
+    if ((string) ($request['hiker_name'] ?? '') === $name) {
+      $pendingMine++;
+    }
+  }
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
 }
 include 'partials/header.php';
 include 'partials/navbar.php';
@@ -130,6 +142,15 @@ $organizerCards = [
     'cta'     => ['text' => 'Manage events', 'href' => 'index.php?page=my_event', 'type' => 'secondary'],
     'img'     => tc_trail_image_url_for_title('Mt. Kalatungan Sweep'),
   ],
+  [
+    'label'   => 'Organizer',
+    'title'   => 'Published events',
+    'meta'    => count(tc_events()) . ' active events · monitor and update details',
+    'diff'    => '',
+    'org'     => '',
+    'cta'     => ['text' => 'Manage events', 'href' => 'index.php?page=my_event', 'type' => 'secondary'],
+    'img'     => 'assets/img/mountain-landingpage.jpg',
+  ],
 ];
 
 $cards   = $role === 'hiker' ? $hikerCards : $organizerCards;
@@ -182,9 +203,15 @@ $jsCards = json_encode(array_values($cards));
 
     <?php if ($role === 'hiker'): ?>
     <div class="dash-notice">
+<<<<<<< HEAD
       <strong>My request status</strong> — You have
       <a href="index.php?page=my_event"><?php echo $pendingMine; ?> pending</a>,
       <?php echo $approvedMine; ?> approved, and <?php echo $declinedMine; ?> declined request<?php echo ($pendingMine + $approvedMine + $declinedMine) === 1 ? '' : 's'; ?>.
+=======
+      <strong>Pending requests</strong> — You have
+      <a href="index.php?page=my_event"><?php echo $pendingMine; ?> join request<?php echo $pendingMine === 1 ? '' : 's'; ?></a>
+      awaiting organizer review.
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
     </div>
     <?php endif; ?>
   </div>

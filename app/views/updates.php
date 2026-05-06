@@ -3,6 +3,7 @@ declare(strict_types=1);
 $pageTitle = 'Updates — TrailConnect';
 $bodyClass = 'app-body';
 $events = array_values(tc_events());
+<<<<<<< HEAD
 $events = array_values(array_filter($events, static function ($event): bool {
     return tc_event_manageable_by_current_organizer(is_array($event) ? $event : null);
 }));
@@ -12,6 +13,9 @@ $updates = array_values(array_filter($updates, static function (array $u): bool 
 
     return tc_event_manageable_by_current_organizer(is_array($ev) ? $ev : null);
 }));
+=======
+$updates = array_values(tc_updates());
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
 usort($updates, static function (array $a, array $b): int {
     return strcmp((string) ($b['posted_at'] ?? ''), (string) ($a['posted_at'] ?? ''));
 });

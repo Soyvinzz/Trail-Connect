@@ -2,6 +2,7 @@
 declare(strict_types=1);
 $pageTitle = 'Event details — TrailConnect';
 $bodyClass = 'app-body';
+<<<<<<< HEAD
 $eventId = (int) ($_GET['event_id'] ?? 0);
 $event = $eventId > 0 ? tc_find_event($eventId) : null;
 if ($event === null) {
@@ -22,6 +23,17 @@ $defaultReturn = tc_role() === 'organizer' ? 'index.php?page=my_event' : 'index.
 $returnUrl = (string) ($_GET['return'] ?? $defaultReturn);
 if ($returnUrl === '' || strpos($returnUrl, 'index.php') !== 0) {
     $returnUrl = $defaultReturn;
+=======
+$eventId = (int) ($_GET['event_id'] ?? 1);
+$event = tc_find_event($eventId);
+if ($event === null) {
+    $event = tc_find_event(1);
+    $eventId = (int) ($event['id'] ?? 1);
+}
+$returnUrl = (string) ($_GET['return'] ?? 'index.php?page=find_hikes');
+if ($returnUrl === '' || strpos($returnUrl, 'index.php') !== 0) {
+    $returnUrl = 'index.php?page=find_hikes';
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
 }
 $difficultyLabels = [
     'easy' => 'EASY',
@@ -29,6 +41,7 @@ $difficultyLabels = [
     'hard' => 'HARD',
     'vhard' => 'VERY HARD',
 ];
+<<<<<<< HEAD
 $msg = (string) ($_GET['msg'] ?? '');
 $reason = (string) ($_GET['reason'] ?? '');
 $joinErrors = [
@@ -49,6 +62,11 @@ foreach (tc_join_requests() as $request) {
     $byName = (string) $request['hiker_name'] === $hikerName;
     $byUser = $hikerUid > 0 && isset($request['user_id']) && (int) $request['user_id'] === $hikerUid;
     if ($byName || $byUser) {
+=======
+$myRequest = null;
+foreach (tc_join_requests() as $request) {
+    if ((int) $request['event_id'] === $eventId && (string) $request['hiker_name'] === tc_display_name()) {
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
         $myRequest = $request;
         break;
     }

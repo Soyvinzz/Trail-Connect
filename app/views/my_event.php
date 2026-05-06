@@ -3,6 +3,7 @@ declare(strict_types=1);
 $pageTitle = 'My events — TrailConnect';
 $bodyClass = 'app-body';
 $role = tc_role();
+<<<<<<< HEAD
 $requests = tc_join_requests();
 $currentName = tc_display_name();
 $currentUserId = tc_current_user_id();
@@ -26,6 +27,18 @@ foreach ($requests as $request) {
         if (!tc_event_manageable_by_current_organizer(is_array($evt) ? $evt : null)) {
             continue;
         }
+=======
+$events = tc_events();
+$requests = tc_join_requests();
+$currentName = tc_display_name();
+$myRequests = [];
+$incomingRequests = [];
+foreach ($requests as $request) {
+    if ($role === 'hiker' && (string) $request['hiker_name'] === $currentName) {
+        $myRequests[] = $request;
+    }
+    if ($role === 'organizer') {
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
         $incomingRequests[] = $request;
     }
 }
@@ -37,7 +50,10 @@ $messages = [
     'join_request_submitted' => 'Join request submitted. Status is now pending.',
     'request_status_updated' => 'Join request status updated.',
     'join_request_deleted' => 'Join request deleted.',
+<<<<<<< HEAD
     'join_requirement_failed' => 'Join request blocked. Your profile does not yet meet this event minimum requirement.',
+=======
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
 ];
 $difficultyLabels = [
     'easy' => 'EASY',
@@ -72,11 +88,15 @@ $currentReturn = (string) ($_SERVER['REQUEST_URI'] ?? 'index.php?page=my_event')
                 <p class="text-muted">No published events yet.</p>
             <?php else : ?>
                 <?php foreach ($events as $event) : ?>
+<<<<<<< HEAD
                     <?php $rowTrailImg = tc_trail_image_url($event); ?>
                     <article class="event-row" style="margin-bottom:1rem">
                         <div class="event-row__thumb-wrap" aria-hidden="true">
                             <img class="event-row__thumb" src="<?php echo htmlspecialchars($rowTrailImg, ENT_QUOTES, 'UTF-8'); ?>" alt="" width="112" height="84" loading="lazy" decoding="async">
                         </div>
+=======
+                    <article class="event-row" style="margin-bottom:1rem">
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
                         <div class="event-row__main">
                             <div class="event-row__top">
                                 <h3 class="event-card__trail" style="margin:0"><?php echo htmlspecialchars((string) $event['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
@@ -108,6 +128,7 @@ $currentReturn = (string) ($_SERVER['REQUEST_URI'] ?? 'index.php?page=my_event')
             <?php else : ?>
                 <?php foreach ($incomingRequests as $request) : ?>
                     <?php $event = tc_find_event((int) $request['event_id']); ?>
+<<<<<<< HEAD
                     <?php $status = (string) ($request['status'] ?? 'pending'); ?>
                     <?php
                     $joinerLevel = 'Not set';
@@ -149,6 +170,13 @@ $currentReturn = (string) ($_SERVER['REQUEST_URI'] ?? 'index.php?page=my_event')
                         </p>
                         <div class="inline-actions" style="margin-top:0.75rem">
                             <span class="badge badge--pending"><?php echo htmlspecialchars(ucfirst($status), ENT_QUOTES, 'UTF-8'); ?></span>
+=======
+                    <article class="request-card card card--inset" style="margin-bottom:1rem">
+                        <p class="request-card__who"><strong><?php echo htmlspecialchars((string) $request['hiker_name'], ENT_QUOTES, 'UTF-8'); ?></strong> requested <strong><?php echo htmlspecialchars((string) ($event['title'] ?? 'Unknown event'), ENT_QUOTES, 'UTF-8'); ?></strong></p>
+                        <p class="request-card__when"><?php echo htmlspecialchars((string) $request['requested_at'], ENT_QUOTES, 'UTF-8'); ?></p>
+                        <div class="inline-actions" style="margin-top:0.75rem">
+                            <span class="badge badge--pending"><?php echo htmlspecialchars(ucfirst((string) $request['status']), ENT_QUOTES, 'UTF-8'); ?></span>
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
                             <form method="post" action="index.php?page=my_event">
                                 <input type="hidden" name="action" value="request_status">
                                 <input type="hidden" name="request_id" value="<?php echo (int) $request['id']; ?>">
@@ -179,11 +207,15 @@ $currentReturn = (string) ($_SERVER['REQUEST_URI'] ?? 'index.php?page=my_event')
             <?php else : ?>
                 <?php foreach ($myRequests as $request) : ?>
                     <?php $event = tc_find_event((int) $request['event_id']); ?>
+<<<<<<< HEAD
                     <?php $hikerTrailImg = tc_trail_image_url(is_array($event) ? $event : null); ?>
                     <article class="event-row" style="margin-bottom:1rem">
                         <div class="event-row__thumb-wrap" aria-hidden="true">
                             <img class="event-row__thumb" src="<?php echo htmlspecialchars($hikerTrailImg, ENT_QUOTES, 'UTF-8'); ?>" alt="" width="112" height="84" loading="lazy" decoding="async">
                         </div>
+=======
+                    <article class="event-row" style="margin-bottom:1rem">
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
                         <div class="event-row__main">
                             <div class="event-row__top">
                                 <h3 class="event-card__trail" style="margin:0"><?php echo htmlspecialchars((string) ($event['title'] ?? 'Unknown event'), ENT_QUOTES, 'UTF-8'); ?></h3>
@@ -199,6 +231,7 @@ $currentReturn = (string) ($_SERVER['REQUEST_URI'] ?? 'index.php?page=my_event')
                                 <span class="badge badge--pending">Pending</span>
                             <?php endif; ?>
                             <a class="btn-secondary btn-secondary--sm" href="index.php?page=event_details&event_id=<?php echo (int) $request['event_id']; ?>&return=<?php echo urlencode($currentReturn); ?>">Details</a>
+<<<<<<< HEAD
                             <?php if ($request['status'] !== 'approved') : ?>
                                 <form method="post" action="index.php?page=my_event">
                                     <input type="hidden" name="action" value="delete_request">
@@ -206,6 +239,8 @@ $currentReturn = (string) ($_SERVER['REQUEST_URI'] ?? 'index.php?page=my_event')
                                     <button type="submit" class="btn-secondary btn-secondary--sm">Cancel request</button>
                                 </form>
                             <?php endif; ?>
+=======
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
                         </div>
                     </article>
                 <?php endforeach; ?>

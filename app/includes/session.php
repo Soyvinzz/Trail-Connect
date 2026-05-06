@@ -156,6 +156,7 @@ function tc_display_name(): string
     return $n !== '' ? $n : (tc_role() === 'organizer' ? 'Alex Rivers' : 'Jordan Peak');
 }
 
+<<<<<<< HEAD
 function tc_event_manageable_by_current_organizer(?array $event): bool
 {
     if (!is_array($event)) {
@@ -710,12 +711,86 @@ function tc_delete_profile(): void
             $_SESSION['tc_avatar_path'] = '';
         } catch (\Throwable $e) {
         }
+=======
+function tc_seed_data(): void
+{
+    if (!isset($_SESSION['tc_events']) || !is_array($_SESSION['tc_events'])) {
+        $_SESSION['tc_events'] = [
+            1 => [
+                'id' => 1,
+                'title' => 'Mt. Pulag · Akiki–Ambangeg batch',
+                'trail' => 'Mt. Pulag · Akiki–Ambangeg (Benguet / Ifugao)',
+                'date' => '2026-05-03',
+                'time' => '05:00',
+                'difficulty' => 'hard',
+                'meet' => 'Benguet briefing point',
+                'max' => 12,
+                'desc' => 'Major hike batch with staged ascent and safety regroup points.',
+                'approval' => 'manual',
+                'organizer' => 'Cordillera Guides',
+                'status' => 'published',
+            ],
+            2 => [
+                'id' => 2,
+                'title' => 'Mt. Guiting-Guiting · Knife-edge roster',
+                'trail' => 'Mt. Guiting-Guiting Knife-Edge (Romblon)',
+                'date' => '2026-06-01',
+                'time' => '06:00',
+                'difficulty' => 'vhard',
+                'meet' => 'Sibuyan staging area',
+                'max' => 8,
+                'desc' => 'Technical climb for experienced hikers only.',
+                'approval' => 'manual',
+                'organizer' => 'Sibuyan Expeditions',
+                'status' => 'published',
+            ],
+        ];
+    }
+
+    if (!isset($_SESSION['tc_join_requests']) || !is_array($_SESSION['tc_join_requests'])) {
+        $_SESSION['tc_join_requests'] = [
+            1 => [
+                'id' => 1,
+                'event_id' => 1,
+                'hiker_name' => 'Alex Reyes',
+                'status' => 'pending',
+                'requested_at' => '2026-04-03 10:15:00',
+            ],
+            2 => [
+                'id' => 2,
+                'event_id' => 2,
+                'hiker_name' => 'Jam Santos',
+                'status' => 'pending',
+                'requested_at' => '2026-04-02 15:30:00',
+            ],
+        ];
+    }
+
+    if (!isset($_SESSION['tc_updates']) || !is_array($_SESSION['tc_updates'])) {
+        $_SESSION['tc_updates'] = [
+            1 => [
+                'id' => 1,
+                'event_id' => 1,
+                'type' => 'Meet point',
+                'message' => 'Meet at the agreed DENR briefing area. Group flag is teal + white.',
+                'posted_at' => '2026-04-03 14:20:00',
+            ],
+            2 => [
+                'id' => 2,
+                'event_id' => 2,
+                'type' => 'Safety',
+                'message' => 'If wind gusts exceed comfort on knife-edge, shorten segment and regroup.',
+                'posted_at' => '2026-04-02 18:45:00',
+            ],
+        ];
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
     }
 }
 
 function tc_events(): array
 {
     tc_seed_data();
+<<<<<<< HEAD
     if (tc_db_entities_available()) {
         try {
             return tc_db_events_fetch_all_assoc();
@@ -763,16 +838,23 @@ function tc_event_count_for_current_organizer(): int
     }
 
     return $n;
+=======
+
+    return $_SESSION['tc_events'];
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
 }
 
 function tc_find_event(int $eventId): ?array
 {
+<<<<<<< HEAD
     if (tc_db_entities_available()) {
         try {
             return tc_db_event_find($eventId);
         } catch (\Throwable $e) {
         }
     }
+=======
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
     $events = tc_events();
 
     return $events[$eventId] ?? null;
@@ -781,12 +863,15 @@ function tc_find_event(int $eventId): ?array
 function tc_save_event(array $event): int
 {
     tc_seed_data();
+<<<<<<< HEAD
     if (tc_db_entities_available()) {
         try {
             return tc_db_event_save($event);
         } catch (\Throwable $e) {
         }
     }
+=======
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
     $id = isset($event['id']) ? (int) $event['id'] : 0;
     if ($id <= 0) {
         $id = empty($_SESSION['tc_events']) ? 1 : (max(array_keys($_SESSION['tc_events'])) + 1);
@@ -800,6 +885,7 @@ function tc_save_event(array $event): int
 function tc_delete_event(int $eventId): void
 {
     tc_seed_data();
+<<<<<<< HEAD
     if (tc_db_entities_available()) {
         try {
             tc_db_event_delete($eventId);
@@ -810,11 +896,19 @@ function tc_delete_event(int $eventId): void
     }
     unset($_SESSION['tc_events'][$eventId]);
     foreach ($_SESSION['tc_join_requests'] ?? [] as $id => $request) {
+=======
+    unset($_SESSION['tc_events'][$eventId]);
+    foreach ($_SESSION['tc_join_requests'] as $id => $request) {
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
         if ((int) $request['event_id'] === $eventId) {
             unset($_SESSION['tc_join_requests'][$id]);
         }
     }
+<<<<<<< HEAD
     foreach ($_SESSION['tc_updates'] ?? [] as $id => $update) {
+=======
+    foreach ($_SESSION['tc_updates'] as $id => $update) {
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
         if ((int) $update['event_id'] === $eventId) {
             unset($_SESSION['tc_updates'][$id]);
         }
@@ -824,6 +918,7 @@ function tc_delete_event(int $eventId): void
 function tc_join_requests(): array
 {
     tc_seed_data();
+<<<<<<< HEAD
     if (tc_db_entities_available()) {
         try {
             return tc_db_join_requests_fetch_all_assoc();
@@ -832,11 +927,16 @@ function tc_join_requests(): array
     }
 
     return isset($_SESSION['tc_join_requests']) && is_array($_SESSION['tc_join_requests']) ? $_SESSION['tc_join_requests'] : [];
+=======
+
+    return $_SESSION['tc_join_requests'];
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
 }
 
 function tc_save_join_request(array $request): int
 {
     tc_seed_data();
+<<<<<<< HEAD
     $uid = tc_current_user_id();
     if ($uid > 0 && !isset($request['user_id'])) {
         $request['user_id'] = $uid;
@@ -847,6 +947,8 @@ function tc_save_join_request(array $request): int
         } catch (\Throwable $e) {
         }
     }
+=======
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
     $id = isset($request['id']) ? (int) $request['id'] : 0;
     if ($id <= 0) {
         $id = empty($_SESSION['tc_join_requests']) ? 1 : (max(array_keys($_SESSION['tc_join_requests'])) + 1);
@@ -860,6 +962,7 @@ function tc_save_join_request(array $request): int
 function tc_delete_join_request(int $requestId): void
 {
     tc_seed_data();
+<<<<<<< HEAD
     if (tc_db_entities_available()) {
         try {
             tc_db_join_request_delete($requestId);
@@ -868,12 +971,15 @@ function tc_delete_join_request(int $requestId): void
         } catch (\Throwable $e) {
         }
     }
+=======
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
     unset($_SESSION['tc_join_requests'][$requestId]);
 }
 
 function tc_updates(): array
 {
     tc_seed_data();
+<<<<<<< HEAD
     if (tc_db_entities_available()) {
         try {
             return tc_db_updates_fetch_all_assoc();
@@ -882,17 +988,24 @@ function tc_updates(): array
     }
 
     return isset($_SESSION['tc_updates']) && is_array($_SESSION['tc_updates']) ? $_SESSION['tc_updates'] : [];
+=======
+
+    return $_SESSION['tc_updates'];
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
 }
 
 function tc_save_update(array $update): int
 {
     tc_seed_data();
+<<<<<<< HEAD
     if (tc_db_entities_available()) {
         try {
             return tc_db_update_save($update);
         } catch (\Throwable $e) {
         }
     }
+=======
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
     $id = isset($update['id']) ? (int) $update['id'] : 0;
     if ($id <= 0) {
         $id = empty($_SESSION['tc_updates']) ? 1 : (max(array_keys($_SESSION['tc_updates'])) + 1);
@@ -906,6 +1019,7 @@ function tc_save_update(array $update): int
 function tc_delete_update(int $updateId): void
 {
     tc_seed_data();
+<<<<<<< HEAD
     if (tc_db_entities_available()) {
         try {
             tc_db_update_delete($updateId);
@@ -1271,3 +1385,7 @@ function tc_is_admin_user(): bool
 }
 
 require_once __DIR__ . '/trail_images.php';
+=======
+    unset($_SESSION['tc_updates'][$updateId]);
+}
+>>>>>>> d32810119b58bc9e2967e699ffb7232a7c867b55
